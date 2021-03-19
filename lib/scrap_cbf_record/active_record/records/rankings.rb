@@ -3,7 +3,7 @@
 require 'active_support/core_ext/hash/except'
 
 class ScrapCbfRecord
-  module ActiveRecord
+  class ActiveRecord
     class Rankings < Base
       REMOVE_ATTRS_ON_CREATE = %i[team next_opponent].freeze
       REMOVE_ATTRS_ON_UPDATE = %i[posicao team next_opponent].freeze

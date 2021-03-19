@@ -4,7 +4,7 @@ require 'json'
 require 'active_support/core_ext/hash/indifferent_access'
 
 class ScrapCbfRecord
-  module ActiveRecord
+  class ActiveRecord
     class Record
       def initialize(records)
         records = parse_json!(records) if records.is_a?(String)

@@ -3,7 +3,7 @@
 require 'active_support/core_ext/hash/except'
 
 class ScrapCbfRecord
-  module ActiveRecord
+  class ActiveRecord
     class Matches < Base
       REMOVE_ATTRS_ON_CREATE = %i[team opponent round].freeze
       REMOVE_ATTRS_ON_UPDATE = %i[team opponent id_match round].freeze

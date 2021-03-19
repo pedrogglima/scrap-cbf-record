@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  module ActiveRecord
+  class ActiveRecord
     class Base
       def initialize(
         championship,

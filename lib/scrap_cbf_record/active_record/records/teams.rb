@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  module ActiveRecord
+  class ActiveRecord
     class Teams < Base
       def initialize(teams)
         unless teams.respond_to?(:each)
