@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: ./spec/setup/Dockerfile
-    command: bundle exec rake -t spec
+    entrypoint: bundle exec rake -t spec
     volumes:
       - .:/var/www/app
       - gem_cache_spec:/gems
