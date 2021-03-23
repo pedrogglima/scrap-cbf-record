@@ -17,7 +17,7 @@ class ScrapCbfRecord
 
       def create_unless_found
         @teams.each do |hash|
-          team = find_team(name: hash[:name])
+          team = find_team(hash[:name])
           next if team
 
           @class_team.create(hash)

@@ -1,0 +1,7 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  host: database
+  username: postgres
+  password: some-long-secure-password
+  database: scrap_cbf_record_test

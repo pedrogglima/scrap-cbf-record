@@ -1,65 +1,38 @@
 # frozen_string_literal: true
 
 RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
-  let!(:record_config) do
-    class Championship
-      attr_accessor :id, :year
-      def initialize
-        @id = 1
-        @year = 2020
-      end
+  let(:championship) { create(:championship) }
+  let(:round) { create(:round, championship_id: championship.id) }
 
-      def self.find_by(_attr)
-        new
-      end
-    end
+  let(:championship_hash) { attributes_for(:championship_hash) }
+  let(:round_hash) { attributes_for(:round_hash) }
+  let(:array_rounds) { [round_hash] }
 
-    class Match; end
-    class Ranking; end
-    class Round; end
-    class Team; end
-  end
-
-  let(:rounds_hash) do
-    [
-      {
-        number: '1',
-        matches: [{ id_match: '1' }, { id_match: '2' }]
-      }
-    ]
-  end
-
-  let(:round_hash_on_create) do
-    {
-      number: '1',
-      championship_id: Championship.new.id
-    }
-  end
-
-  let(:championship_instance) { Championship.new }
-
-  subject { ScrapCbfRecord::ActiveRecord::Rounds.new(rounds_hash) }
+  subject { ScrapCbfRecord::ActiveRecord::Rounds.new(array_rounds) }
 
   describe 'create_unless_found' do
     context 'when not found' do
       before do
-        allow(Round).to receive(:find_round).and_return(nil)
+        # may need (see databasecleaner gem)
+        Round.destroy_all
       end
 
       it do
-        expect(Round).to receive(:create).with(round_hash_on_create)
-        subject.create_unless_found(championship_instance)
+        expect do 
+          subject.create_unless_found(championship_hash)
+        end.to(change { Round.count }.by(1))
       end
     end
 
     context 'when found' do
       before do
-        allow(Round).to receive(:find_round).and_return(true)
+        round
       end
 
       it do
-        expect(Round).to_not receive(:create)
-        subject.create_unless_found(championship_instance)
+        expect do 
+          subject.create_unless_found(championship_hash)
+        end.to(change { Round.count }.by(0))
       end
     end
   end

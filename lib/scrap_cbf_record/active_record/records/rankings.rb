@@ -21,7 +21,7 @@ class ScrapCbfRecord
       end
 
       def create_or_update(championship)
-        current_championship = find_championship(championship.year)
+        current_championship = find_championship(championship[:year])
 
         @rankings.each do |hash|
           ranking = find_ranking(
@@ -32,6 +32,7 @@ class ScrapCbfRecord
 
           if ranking
             hash = prepare_hash_before_update(hash, team, next_opponent)
+
             ranking.update(hash)
           else
             args = [hash, current_championship, team, next_opponent]

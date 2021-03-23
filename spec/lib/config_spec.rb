@@ -3,58 +3,54 @@
 RSpec.describe ScrapCbfRecord::Config do
   subject { ScrapCbfRecord::Config.new }
 
+  before do
+    # when you want to use a different name than the default classes
+    class CustomClassName; end 
+  end
+
+  let(:championship) { 'Championship' }
+  let(:match) { 'Match' }
+  let(:ranking) { 'Ranking' }
+  let(:round) { 'Round' }
+  let(:team) { 'Team' }
+  let(:custom_name) { 'CustomClassName' }
+
+  let(:championship_const) { Object.const_get(championship) }
+  let(:match_const) { Object.const_get(match) }
+  let(:ranking_const) { Object.const_get(ranking) }
+  let(:round_const) { Object.const_get(round) }
+  let(:team_const) { Object.const_get(team) }
+  let(:custom_name_const) { Object.const_get(custom_name) }
+
   describe 'initialize' do
-    it { expect(subject.championship_class).to eq('Championship') }
-    it { expect(subject.match_class).to eq('Match') }
-    it { expect(subject.ranking_class).to eq('Ranking') }
-    it { expect(subject.round_class).to eq('Round') }
-    it { expect(subject.team_class).to eq('Team') }
+    it { expect(subject.championship_class).to eq(championship) }
+    it { expect(subject.match_class).to eq(match) }
+    it { expect(subject.ranking_class).to eq(ranking) }
+    it { expect(subject.round_class).to eq(round) }
+    it { expect(subject.team_class).to eq(team) }
   end
 
   describe 'validate' do
     let(:config) do
-      subject.championship_class = 'Championship'
-      subject.match_class = 'Match'
-      subject.ranking_class = 'Ranking'
-      subject.round_class = 'Round'
-      subject.team_class = 'Team'
+      subject.championship_class = championship
+      subject.match_class = match
+      subject.ranking_class = ranking
+      subject.round_class = round
+      subject.team_class = team
 
       subject
     end
 
-    before do
-      class Championship; end
-      class Match; end
-      class Ranking; end
-      class Round; end
-      class Team; end
-    end
-
     it { expect { config.validate }.to_not raise_error }
-
-    context 'when only some constants are present' do
-      let(:config) do
-        subject.match_class = 'Match'
-        subject.team_class = 'Team'
-        subject
-      end
-
-      before do
-        class Match; end
-        class Team; end
-      end
-
-      it { expect { config.validate }.to_not raise_error }
-    end
 
     context 'when a different class name is set' do
       let(:config) do
-        subject.team_class = 'Club'
+        subject.team_class = custom_name
         subject
       end
 
       before do
-        class Club; end
+        custom_name_const
       end
 
       it { expect { config.validate }.to_not raise_error }
@@ -80,43 +76,23 @@ RSpec.describe ScrapCbfRecord::Config do
   end
 
   describe '<class>_const' do
-    before do
-      class Championship; end
-      class Match; end
-      class Ranking; end
-      class Round; end
-      class Team; end
-    end
-
-    it { expect(subject.championship_const).to be(Championship) }
-    it { expect(subject.match_const).to be(Match) }
-    it { expect(subject.ranking_const).to be(Ranking) }
-    it { expect(subject.round_const).to be(Round) }
-    it { expect(subject.team_const).to be(Team) }
+    it { expect(subject.championship_const).to be(championship_const) }
+    it { expect(subject.match_const).to be(match_const) }
+    it { expect(subject.ranking_const).to be(ranking_const) }
+    it { expect(subject.round_const).to be(round_const) }
+    it { expect(subject.team_const).to be(team_const) }
 
     context 'when a different class name is set' do
       let(:config) do
-        subject.team_class = 'Club'
+        subject.team_class = custom_name
         subject
       end
 
-      before do
-        class Club; end
-      end
-
-      it { expect(config.team_const).to be(Club) }
+      it { expect(config.team_const).to be(custom_name_const) }
     end
   end
 
   describe 'record_classes' do
-    before do
-      class Championship; end
-      class Match; end
-      class Ranking; end
-      class Round; end
-      class Team; end
-    end
-
     it { expect(subject.record_classes).to be_a(Array) }
     it { expect(subject.record_classes).to_not include(nil) }
     it { expect(subject.record_classes.length).to eq(5) }

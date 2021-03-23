@@ -4,6 +4,8 @@ class ScrapCbfRecord
   class ActiveRecord
     def self.save(records)
       Record.new(records).save
+
+      true
     end
   end
 end

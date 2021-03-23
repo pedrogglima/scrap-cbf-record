@@ -21,9 +21,10 @@ class ScrapCbfRecord
       end
 
       def create_or_update(championship)
-        current_championship = find_championship(championship.year)
+        current_championship = find_championship(championship[:year])
 
         @matches.each do |hash|
+          
           match = find_match(hash[:id_match], current_championship)
           round = find_round(hash[:round], current_championship)
           team = find_team(hash[:team])

@@ -64,10 +64,27 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Record do
   end
 
   describe 'save' do
-    # This method only offers a interface for others class/method.
-    # Those others class/methods were already tested in records/*_spec.rb.
-    # Only thing that may be worthy note here is that:
-    # The order of callings methods matter here.
-    # It must go Teams > (Rankings|Rounds) > Matches
+    let!(:championship) { create(:championship) }
+    let(:championship_hash) { attributes_for(:championship_hash) }
+    let(:match_hash) { attributes_for(:match_hash) }
+    let(:ranking_hash) { attributes_for(:ranking_hash) }
+    let(:round_hash) { attributes_for(:round_hash) }
+    let(:team_hash) { attributes_for(:team_hash) }
+
+    let(:records_hash) do
+      {
+        championship: championship_hash,
+        matches: [match_hash],
+        rankings: [ranking_hash],
+        rounds: [round_hash],
+        teams: [team_hash]
+      }
+    end
+
+    let(:record) { record_class.new(records_hash) }
+    
+    context "when is valid should return" do
+      it { expect(record.save).to be(true) }
+    end
   end
 end

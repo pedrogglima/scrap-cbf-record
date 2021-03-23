@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  spec:
+    build:
+      context: .
+      dockerfile: ./spec/setup/Dockerfile
+    command: bundle exec rake -t spec
+    volumes:
+      - .:/var/www/app
+      - gem_cache_spec:/gems
+
+  database:
+    image: postgres
+    environment:
+      - DATABASE_HOST=database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=some-long-secure-password
+      - POSTGRES_DB=scrap_cbf_record_test
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  gem_cache_spec:

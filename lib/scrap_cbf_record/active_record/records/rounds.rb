@@ -20,10 +20,10 @@ class ScrapCbfRecord
       end
 
       def create_unless_found(championship)
-        current_championship = find_championship(championship.year)
+        current_championship = find_championship(championship[:year])
 
         @rounds.each do |hash|
-          round = @class_round.find_round(hash[:number], current_championship)
+          round = find_round(hash[:number], current_championship)
           next if round
 
           hash = prepare_hash_before_create(hash, current_championship)

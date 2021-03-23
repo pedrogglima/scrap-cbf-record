@@ -24,7 +24,7 @@ class ScrapCbfRecord
 
       # Save records to the database.
       # Note: Because of database relationships and dependencies between records
-      #  there exist a saving order for when records are new.
+      #  there is a saving order.
       # - Teams must be save before Rankings and Match.
       # - Rounds must be save before Matches
       #
