@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_record'
+require 'yaml'
 
 current_dir = File.dirname(__FILE__)
 
@@ -9,18 +10,18 @@ db_dir = current_dir + '/../setup/db'
 schema_file = db_dir + '/schema.rb'
 db_config = YAML.load_file(db_dir + '/database.yml')
 
-# add DatabaseTasks class to context 
+# add DatabaseTasks class to context
 include ActiveRecord::Tasks
 
 # create db configs
 DatabaseTasks.env = ENV['ENV'] || 'test'
 DatabaseTasks.db_dir = db_dir
 DatabaseTasks.database_configuration = db_config
-database_configurations = DatabaseTasks.database_configuration
+database_configuration = DatabaseTasks.database_configuration
 
 # pass db config to the constructor class
 # w/ this set, DatabaseTasks won't find the db config to create the database
-ActiveRecord::Base.configurations = DatabaseTasks.database_configuration
+ActiveRecord::Base.configurations = database_configuration
 
 # create database from db config
 DatabaseTasks.create_current('test')
