@@ -4,14 +4,13 @@ FactoryBot.define do
   factory :match_config, class: Hash do
     class_name { 'Match' }
     rename_attrs do
-      {
-        date: :date_match
-      }
+      {}
     end
-    exclude_attrs do
-      %i[
-        start_at
-      ]
+    exclude_attrs_on_create do
+      %i[]
+    end
+    exclude_attrs_on_update do
+      %i[id_match]
     end
     associations do
       %i[
@@ -25,7 +24,8 @@ FactoryBot.define do
       new({
             class_name: class_name,
             rename_attrs: rename_attrs,
-            exclude_attrs: exclude_attrs,
+            exclude_attrs_on_create: exclude_attrs_on_create,
+            exclude_attrs_on_update: exclude_attrs_on_update,
             associations: associations
           })
     end

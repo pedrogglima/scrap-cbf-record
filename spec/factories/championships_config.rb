@@ -6,7 +6,10 @@ FactoryBot.define do
     rename_attrs do
       {}
     end
-    exclude_attrs do
+    exclude_attrs_on_create do
+      %i[]
+    end
+    exclude_attrs_on_update do
       %i[]
     end
     associations do
@@ -17,7 +20,8 @@ FactoryBot.define do
       new({
             class_name: class_name,
             rename_attrs: rename_attrs,
-            exclude_attrs: exclude_attrs,
+            exclude_attrs_on_create: exclude_attrs_on_create,
+            exclude_attrs_on_update: exclude_attrs_on_update,
             associations: associations
           })
     end

@@ -4,12 +4,13 @@ FactoryBot.define do
   factory :ranking_config, class: Hash do
     class_name { 'Ranking' }
     rename_attrs do
-      {
-        pontos: :points
-      }
+      {}
     end
-    exclude_attrs do
+    exclude_attrs_on_create do
       %i[]
+    end
+    exclude_attrs_on_update do
+      %i[posicao]
     end
     associations do
       %i[
@@ -22,7 +23,8 @@ FactoryBot.define do
       new({
             class_name: class_name,
             rename_attrs: rename_attrs,
-            exclude_attrs: exclude_attrs,
+            exclude_attrs_on_create: exclude_attrs_on_create,
+            exclude_attrs_on_update: exclude_attrs_on_update,
             associations: associations
           })
     end
