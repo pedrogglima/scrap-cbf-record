@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'active_support/core_ext/hash/except'
-
 class ScrapCbfRecord
   class ActiveRecord
     class Matches < Base
@@ -24,7 +22,6 @@ class ScrapCbfRecord
         current_championship = find_championship(championship[:year])
 
         @matches.each do |hash|
-          
           match = find_match(hash[:id_match], current_championship)
           round = find_round(hash[:round], current_championship)
           team = find_team(hash[:team])

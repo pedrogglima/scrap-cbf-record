@@ -1,0 +1,44 @@
+championship:
+  class_name: Championship
+  rename_attrs:
+  exclude_attrs:
+    - attributes_name_to_be_excluded
+  associations:
+
+match:
+  class_name: Match,
+  rename_attrs:
+    id_match: identifier
+  exclude_attrs:
+    - update
+  associations:
+    - championship
+    - round
+    - team
+
+ranking:
+  class_name: Ranking,
+  rename_attrs:
+    pontos: points
+  exclude_attrs:
+    - attributes_name_to_be_excluded
+  associations:
+    - championship
+    - team
+
+round:
+  class_name: Round,
+  rename_attrs:
+    number: identifier
+  exclude_attrs:
+    - attributes_name_to_be_excluded
+  associations:
+    - championship
+
+team:
+  class_name: Team,
+  rename_attrs:
+    state: from
+  exclude_attrs:
+    - attributes_name_to_be_excluded
+  associations:
