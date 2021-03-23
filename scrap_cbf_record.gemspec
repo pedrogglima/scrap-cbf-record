@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activesupport', '~> 5.2.3'
   gem.add_dependency 'json', '~> 2.5'
+  gem.add_dependency 'yaml', '~> 0.1.1'
 
   # gem.add_development_dependencies load on spec/setup/Gemfile
   # Note: gems for test that are meant to be running inside docker
