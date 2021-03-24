@@ -13,12 +13,13 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
   describe 'create_unless_found' do
     context 'when not found' do
       before do
+        championship
         # may need (see databasecleaner gem)
         Round.destroy_all
       end
 
       it do
-        expect do 
+        expect do
           subject.create_unless_found(championship_hash)
         end.to(change { Round.count }.by(1))
       end
@@ -30,7 +31,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
       end
 
       it do
-        expect do 
+        expect do
           subject.create_unless_found(championship_hash)
         end.to(change { Round.count }.by(0))
       end
