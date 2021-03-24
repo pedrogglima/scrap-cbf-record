@@ -13,7 +13,16 @@ class ScrapCbfRecord
             associations: %i[
               championship
               team
+              next_opponent
             ]
+          }
+        end
+
+        def required
+          {
+            must_not_rename_attrs: %i[id],
+            must_exclude_attrs: %i[],
+            must_keep_attrs: %i[id posicao]
           }
         end
       end
@@ -54,22 +63,6 @@ class ScrapCbfRecord
           @exclude_attrs_on_update,
           @associations
         ]
-      end
-
-      def remove_attrs_based_on_assoc
-        @remove_attrs_based_on_assoc ||= remove_attrs
-      end
-
-      private
-
-      def remove_attrs
-        remove_attrs = []
-
-        remove_attrs << :championship if championship_assoc?
-        remove_attrs << :team if team_assoc?
-        remove_attrs << :next_opponent if team_assoc?
-
-        remove_attrs
       end
     end
   end

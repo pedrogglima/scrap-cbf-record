@@ -8,6 +8,10 @@ class ScrapCbfRecord
           raise NotImplementedError, 'default method must be implemented'
         end
 
+        def required
+          raise NotImplementedError, 'required method must be implemented'
+        end
+
         def default_class_name
           default[:class_name]
         end
@@ -26,6 +30,18 @@ class ScrapCbfRecord
 
         def default_associations
           default[:associations]
+        end
+
+        def must_not_rename_attrs
+          required[:must_not_rename_attrs]
+        end
+
+        def must_exclude_attrs
+          required[:must_exclude_attrs]
+        end
+
+        def must_keep_attrs
+          required[:must_keep_attrs]
         end
       end
 
@@ -61,8 +77,10 @@ class ScrapCbfRecord
         Object.const_get(@class_name) if @class_name
       end
 
-      def self_assoc?
-        self.class.name.eq?(@class_name)
+      def self_assoc?(self_record)
+        config_name = self.class.name.split('::').last
+
+        config_name.downcase == self_record.to_s
       end
 
       def championship_assoc?
@@ -81,6 +99,22 @@ class ScrapCbfRecord
         return false unless @associations
 
         @team_assoc ||= @associations.include?(:team)
+      end
+
+      def association?
+        !@associations.empty?
+      end
+
+      def must_not_rename_attrs
+        self.class.must_not_rename_attrs
+      end
+
+      def must_exclude_attrs
+        self.class.must_exclude_attrs
+      end
+
+      def must_keep_attrs
+        self.class.must_keep_attrs
       end
 
       def class_name_validation(class_name)

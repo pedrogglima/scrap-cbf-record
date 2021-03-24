@@ -11,6 +11,15 @@ class ScrapCbfRecord
             exclude_attrs_on_create: %i[],
             exclude_attrs_on_update: %i[],
             associations: %i[]
+
+          }
+        end
+
+        def required
+          {
+            must_not_rename_attrs: %i[id],
+            must_exclude_attrs: %i[],
+            must_keep_attrs: %i[id name]
           }
         end
       end

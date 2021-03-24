@@ -13,6 +13,14 @@ class ScrapCbfRecord
             associations: %i[championship]
           }
         end
+
+        def required
+          {
+            must_not_rename_attrs: %i[id],
+            must_exclude_attrs: %i[matches],
+            must_keep_attrs: %i[id number year]
+          }
+        end
       end
 
       attr_reader :class_name,
