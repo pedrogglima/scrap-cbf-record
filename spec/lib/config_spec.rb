@@ -7,13 +7,15 @@ RSpec.describe ScrapCbfRecord::Config do
   let(:round_class) { Round }
   let(:team_class) { Team }
 
-  let(:championship_config) { ScrapCbfRecord::Config::Championship }
-  let(:match_config) { ScrapCbfRecord::Config::Match }
-  let(:ranking_config) { ScrapCbfRecord::Config::Ranking }
-  let(:round_config) { ScrapCbfRecord::Config::Round }
-  let(:team_config) { ScrapCbfRecord::Config::Team }
+  let(:klass) { ScrapCbfRecord::Config }
 
-  subject { ScrapCbfRecord::Config.new }
+  let(:championship_config) { klass::Championship }
+  let(:match_config) { klass::Match }
+  let(:ranking_config) { klass::Ranking }
+  let(:round_config) { klass::Round }
+  let(:team_config) { klass::Team }
+
+  subject { klass.new }
 
   describe 'initialize' do
     it { expect(subject.championship).to(be_a(championship_config)) }

@@ -1,44 +1,43 @@
 championship:
   class_name: Championship
   rename_attrs:
-  exclude_attrs:
-    - attributes_name_to_be_excluded
+  exclude_attrs_on_create:
+  exclude_attrs_on_update:
   associations:
 
 match:
-  class_name: Match,
+  class_name: Match
   rename_attrs:
-    id_match: identifier
-  exclude_attrs:
-    - update
+  exclude_attrs_on_create:
+  exclude_attrs_on_update:
+    - id_match
   associations:
     - championship
     - round
     - team
 
 ranking:
-  class_name: Ranking,
+  class_name: Ranking
   rename_attrs:
-    pontos: points
-  exclude_attrs:
-    - attributes_name_to_be_excluded
+  exclude_attrs_on_create:
+  exclude_attrs_on_update:
+    - posicao
   associations:
     - championship
     - team
 
 round:
-  class_name: Round,
+  class_name: Round
   rename_attrs:
-    number: identifier
-  exclude_attrs:
-    - attributes_name_to_be_excluded
+  exclude_attrs_on_create:
+    - matches
+  exclude_attrs_on_update:
   associations:
     - championship
 
 team:
-  class_name: Team,
+  class_name: Team
   rename_attrs:
-    state: from
-  exclude_attrs:
-    - attributes_name_to_be_excluded
+  exclude_attrs_on_create:
+  exclude_attrs_on_update:
   associations:
