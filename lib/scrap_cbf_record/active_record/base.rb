@@ -26,7 +26,7 @@ class ScrapCbfRecord
         #
         @config = config
 
-        # returns whether record class has or not specific association
+        # returns whether record has or not specific association
         #
         @championship_assoc = @config.championship_assoc?
         @round_assoc = @config.round_assoc?
@@ -44,6 +44,42 @@ class ScrapCbfRecord
         @must_exclude_attrs = @config.must_exclude_attrs
         @must_keep_attrs = @config.must_keep_attrs
         @must_not_rename_attrs = @config.must_not_rename_attrs
+      end
+
+      def normalize_before_create(hash, assocs = {})
+        hash = include_associations(
+          hash,
+          @associations,
+          assocs
+        )
+
+        hash = exclude_attrs(
+          hash,
+          @exclude_attrs_on_create,
+          @must_exclude_attrs,
+          @must_keep_attrs,
+          @associations
+        )
+
+        rename_attrs(hash, @rename_attrs, @must_not_rename_attrs)
+      end
+
+      def normalize_before_update(hash, assocs = {})
+        hash = include_associations(
+          hash,
+          @associations,
+          assocs
+        )
+
+        hash = exclude_attrs(
+          hash,
+          @exclude_attrs_on_update,
+          @must_exclude_attrs,
+          @must_keep_attrs,
+          @associations
+        )
+
+        rename_attrs(hash, @rename_attrs, @must_not_rename_attrs)
       end
 
       protected
@@ -138,49 +174,13 @@ class ScrapCbfRecord
         end
       end
 
-      def normalize_before_create(hash, assocs = {})
-        hash = include_associations(
-          hash,
-          @associations,
-          assocs
-        )
-
-        hash = exclude_attrs(
-          hash,
-          @exclude_attrs_on_create,
-          @must_exclude_attrs,
-          @must_keep_attrs,
-          @associations
-        )
-
-        rename_attrs(hash, @rename_attrs, @must_not_rename_attrs)
-      end
-
-      def normalize_before_update(hash, assocs = {})
-        hash = include_associations(
-          hash,
-          @associations,
-          assocs
-        )
-
-        hash = exclude_attrs(
-          hash,
-          @exclude_attrs_on_update,
-          @must_exclude_attrs,
-          @must_keep_attrs,
-          @associations
-        )
-
-        rename_attrs(hash, @rename_attrs, @must_not_rename_attrs)
-      end
-
       def include_associations(hash, associations, assocs)
         associations.each do |assocition|
-          key = "#{assocition}_id".to_sym
+          key = "#{assocition}_id"
           instance = assocs[assocition.to_sym]
 
           # cases where associations is nil
-          hash[key] = instance.present? ? instance.id : nil
+          hash[key.to_sym] = instance.present? ? instance.id : nil
         end
 
         hash
@@ -206,7 +206,7 @@ class ScrapCbfRecord
         renames = renames.except(must_keep)
 
         renames.each do |key, val|
-          hash[val] = hash.delete(key) if hash.key?(key)
+          hash[val.to_sym] = hash.delete(key) if hash.key?(key)
         end
 
         hash
