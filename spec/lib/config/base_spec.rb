@@ -15,24 +15,48 @@ RSpec.describe ScrapCbfRecord::Config::Base do
           klass.default_class_name
         end.to raise_error(NotImplementedError)
       end
+
       it do
         expect do
           klass.default_rename_attrs
         end.to raise_error(NotImplementedError)
       end
+
       it do
         expect do
           klass.default_exclude_attrs_on_create
         end.to raise_error(NotImplementedError)
       end
+
       it do
         expect do
           klass.default_exclude_attrs_on_update
         end.to raise_error(NotImplementedError)
       end
+
       it do
         expect do
           klass.default_associations
+        end.to raise_error(NotImplementedError)
+      end
+    end
+
+    describe 'required_<configs_attrs>' do
+      it do
+        expect do
+          klass.must_not_rename_attrs
+        end.to raise_error(NotImplementedError)
+      end
+
+      it do
+        expect do
+          klass.must_exclude_attrs
+        end.to raise_error(NotImplementedError)
+      end
+
+      it do
+        expect do
+          klass.must_keep_attrs
         end.to raise_error(NotImplementedError)
       end
     end
