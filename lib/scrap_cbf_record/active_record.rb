@@ -11,6 +11,7 @@ require_relative 'active_record/rounds'
 require_relative 'active_record/teams'
 
 class ScrapCbfRecord
+  # This module uses Active Record module to save data on database.
   class ActiveRecord
     class << self
       def save(records)
@@ -20,6 +21,15 @@ class ScrapCbfRecord
       end
     end
 
+    # The argument records is a hash (json or not) with the following look :
+    # - hash[:championship] the championship for a specific year and divison
+    # - hash[:matches] the matches for the specific championship
+    # - hash[:rankings] the rankings for the specific championship
+    # - hash[:rounds] the rounds for the specific championship
+    # - hash[:teams] the teams that participated on the specific championship
+    #
+    # @param [records] hash or json returned from ScrapCbf gem
+    # @return [nil]
     def initialize(records)
       records = parse_json!(records) if records.is_a?(String)
 
@@ -38,13 +48,13 @@ class ScrapCbfRecord
 
     # Save records to the database.
     # Note: Because of database relationships and dependencies between records
-    #  there is a saving order.
+    #  there maybe exist a saving order.
     # - Teams must be save before Rankings and Match.
     # - Rounds must be save before Matches
     #
-    # Raise Active Record errors in case of fail while saving
+    # @raise [ActiveRecordError] errors in case of failing while saving
     #
-    # @return [true]
+    # @return [Boolean] true in case of success
     def save
       save_teams(@teams)
       save_rankings(@rankings, @championship)

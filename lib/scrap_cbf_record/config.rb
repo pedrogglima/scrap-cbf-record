@@ -8,6 +8,17 @@ require_relative 'config/round'
 require_relative 'config/team'
 
 class ScrapCbfRecord
+  # This class is responsible for holding the configs on how records
+  # must be save on database. That means:
+  # - which class to use to save the records
+  # - which record attributes to exclude on create and update
+  # - which record attributes to rename
+  # Each of the configs are set for each record:
+  # - championship record
+  # - match record
+  # - ranking record
+  # - round record
+  # - team record
   class Config
     attr_accessor :championship,
                   :match,
@@ -24,7 +35,7 @@ class ScrapCbfRecord
       @team = Team.new
     end
 
-    # Return an array with all record const classes
+    # Return an array with all record classes
     #
     # @return [Array]
     def record_classes
