@@ -9,9 +9,6 @@ require_relative 'config/team'
 
 class ScrapCbfRecord
   class Config
-    class << self
-    end
-
     attr_accessor :championship,
                   :match,
                   :ranking,
