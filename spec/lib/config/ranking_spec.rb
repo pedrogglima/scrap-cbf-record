@@ -11,7 +11,16 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
       associations: %i[
         championship
         team
+        next_opponent
       ]
+    }
+  end
+
+  let(:required) do
+    {
+      must_not_rename_attrs: %i[id],
+      must_exclude_attrs: %i[],
+      must_keep_attrs: %i[id posicao]
     }
   end
 
@@ -58,6 +67,11 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
         it { expect(subject.constant).to be(Ranking) }
       end
 
+      describe 'self_assoc?' do
+        it { expect(subject.self_assoc?(:ranking)).to be(true) }
+        it { expect(subject.self_assoc?(:another_class)).to be(false) }
+      end
+
       describe 'championship_assoc?' do
         it { expect(subject.championship_assoc?).to be(true) }
       end
@@ -69,6 +83,30 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
       describe 'team_assoc?' do
         it { expect(subject.team_assoc?).to be(true) }
       end
+
+      describe 'associations?' do
+        it { expect(subject.association?).to be(true) }
+      end
+
+      describe 'must_not_rename_attrs' do
+        it do
+          expect(subject.must_not_rename_attrs).to(
+            eq(required[:must_not_rename_attrs])
+          )
+        end
+      end
+
+      describe 'must_exclude_attrs' do
+        it do
+          expect(subject.must_exclude_attrs).to eq(
+            required[:must_exclude_attrs]
+          )
+        end
+      end
+
+      describe 'must_keep_attrs' do
+        it { expect(subject.must_keep_attrs).to eq(required[:must_keep_attrs]) }
+      end
     end
   end
 
@@ -76,7 +114,7 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
     let(:config) { attributes_for(:ranking_config, class_name: 'TableRow') }
 
     it { expect { subject.config = config }.to_not raise_error }
-    
+
     context 'when custom <config_attrs>' do
       before do
         subject.config = config
