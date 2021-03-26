@@ -67,8 +67,8 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
                 config.match.config = {
                   class_name: 'Game',
                   rename_attrs: { id_match: 'identifier' },
-                  exclude_attrs_on_create: %i[serie],
-                  exclude_attrs_on_update: %i[serie],
+                  exclude_attrs_on_create: %i[serie updates],
+                  exclude_attrs_on_update: %i[serie updates],
                   associations: {
                     championship: {
                       class_name: 'Championship',
@@ -76,15 +76,15 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
                     },
                     round: {
                       class_name: 'Round',
-                      foreign_key: :round_id
+                      foreign_key: :match_round_id
                     },
                     team: {
                       class_name: 'Team',
-                      foreign_key: :team_id
+                      foreign_key: :match_team_id
                     },
                     opponent: {
                       class_name: 'Team',
-                      foreign_key: :opponent_id
+                      foreign_key: :team_opponent_id
                     }
                   }
                 }
@@ -107,9 +107,9 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
               create(
                 :match_renamed_game,
                 cup_id: championship.id,
-                round_id: round.id,
-                team_id: team.id,
-                opponent_id: opponent.id,
+                match_round_id: round.id,
+                match_team_id: team.id,
+                team_opponent_id: opponent.id,
                 team_score: 1
               )
             end
@@ -121,8 +121,8 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
                 config.match.config = {
                   class_name: 'Game',
                   rename_attrs: { id_match: 'identifier' },
-                  exclude_attrs_on_create: %i[serie],
-                  exclude_attrs_on_update: %i[serie],
+                  exclude_attrs_on_create: %i[serie updates],
+                  exclude_attrs_on_update: %i[serie updates],
                   associations: {
                     championship: {
                       class_name: 'Championship',
@@ -130,15 +130,15 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
                     },
                     round: {
                       class_name: 'Round',
-                      foreign_key: :round_id
+                      foreign_key: :match_round_id
                     },
                     team: {
                       class_name: 'Team',
-                      foreign_key: :team_id
+                      foreign_key: :match_team_id
                     },
                     opponent: {
                       class_name: 'Team',
-                      foreign_key: :opponent_id
+                      foreign_key: :team_opponent_id
                     }
                   }
                 }
@@ -223,8 +223,8 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
             config.match.config = {
               class_name: 'Game',
               rename_attrs: { id_match: 'identifier' },
-              exclude_attrs_on_create: %i[serie],
-              exclude_attrs_on_update: %i[],
+              exclude_attrs_on_create: %i[serie updates],
+              exclude_attrs_on_update: %i[serie updates],
               associations: {
                 championship: {
                   class_name: 'Championship',
@@ -232,15 +232,15 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
                 },
                 round: {
                   class_name: 'Round',
-                  foreign_key: :round_id
+                  foreign_key: :match_round_id
                 },
                 team: {
                   class_name: 'Team',
-                  foreign_key: :team_id
+                  foreign_key: :match_team_id
                 },
                 opponent: {
                   class_name: 'Team',
-                  foreign_key: :opponent_id
+                  foreign_key: :team_opponent_id
                 }
               }
             }
@@ -302,8 +302,8 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
             config.match.config = {
               class_name: 'Game',
               rename_attrs: { id_match: 'identifier' },
-              exclude_attrs_on_create: %i[],
-              exclude_attrs_on_update: %i[serie],
+              exclude_attrs_on_create: %i[serie updates],
+              exclude_attrs_on_update: %i[serie updates],
               associations: {
                 championship: {
                   class_name: 'Championship',
@@ -311,15 +311,15 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
                 },
                 round: {
                   class_name: 'Round',
-                  foreign_key: :round_id
+                  foreign_key: :match_round_id
                 },
                 team: {
                   class_name: 'Team',
-                  foreign_key: :team_id
+                  foreign_key: :match_team_id
                 },
                 opponent: {
                   class_name: 'Team',
-                  foreign_key: :opponent_id
+                  foreign_key: :team_opponent_id
                 }
               }
             }

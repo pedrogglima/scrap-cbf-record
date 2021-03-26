@@ -66,14 +66,13 @@ FactoryBot.define do
 
   factory :match_renamed_game, class: Game do
     association :cup, factory: :championship
-    association :team
-    association :opponent, factory: :team_opponent
-    association :round
+    association :match_team
+    association :team_opponent, factory: :team_opponent
+    association :match_round, factory: :round
 
     match_identifier
     match_team_score
     match_opponent_score
-    match_updates
     match_date
     match_start_at
     match_place

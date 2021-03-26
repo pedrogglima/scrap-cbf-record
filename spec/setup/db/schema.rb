@@ -45,11 +45,10 @@ ActiveRecord::Schema.define do
 
   create_table :games, force: true do |t|
     t.bigint 'cup_id', null: false
-    t.bigint 'team_id', null: false
-    t.bigint 'opponent_id', null: false
-    t.bigint 'round_id', null: false
+    t.bigint 'match_team_id', null: false
+    t.bigint 'team_opponent_id', null: false
+    t.bigint 'match_round_id', null: false
     t.integer 'identifier', null: false
-    t.string 'updates'
     t.string 'place'
     t.datetime 'date'
     t.string 'start_at'
