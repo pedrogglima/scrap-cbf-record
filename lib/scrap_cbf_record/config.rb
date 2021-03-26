@@ -20,7 +20,6 @@ class ScrapCbfRecord
   # - team record
   class Config
     attr_accessor :championship,
-                  :serie,
                   :match,
                   :ranking,
                   :round,
