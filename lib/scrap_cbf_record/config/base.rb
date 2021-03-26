@@ -120,12 +120,38 @@ class ScrapCbfRecord
       # Check if argument matches with the subclasses name.
       # This helps check if config correspond to the right active record config
       #
-      # @param [self_record] symbol/string to be match with self subclasse name
+      # @param [record_type] symbol/string to be match with self subclasse name
       # @return [Boolean]
-      def self_assoc?(self_record)
+      def record_is_a?(record_type)
         config_name = self.class.name.split('::').last
 
-        config_name.downcase == self_record.to_s
+        config_name.downcase == record_type.to_s
+      end
+
+      # Check if attribute was renamed.
+      # It will search the attrs and associations on the calling class
+      # If not found returns the attribute
+      #
+      # @param [attribute] the attribute to be searched on the calling class
+      # @return [Symbol]
+      def searchable_attr(attribute)
+        attribute = attribute.to_sym
+
+        # associations are in the for of association-name_id
+        attr_name, attr_id = attribute.to_s.split('_')
+
+        if attr_name && attr_id
+          associaion_name = attr_name.to_sym
+          if @associations.key?(associaion_name)
+            association = @associations[associaion_name]
+
+            return association[:foreign_key]
+          end
+        end
+
+        return @rename_attrs[attribute] if @rename_attrs.key?(attribute)
+
+        attribute
       end
 
       # Check if current config has specific setting association.
@@ -134,7 +160,7 @@ class ScrapCbfRecord
       def championship_assoc?
         return false unless @associations
 
-        @championship_assoc ||= @associations.include?(:championship)
+        @championship_assoc ||= @associations.key?(:championship)
       end
 
       # Check if current config has specific setting association.
@@ -143,7 +169,7 @@ class ScrapCbfRecord
       def round_assoc?
         return false unless @associations
 
-        @round_assoc ||= @associations.include?(:round)
+        @round_assoc ||= @associations.key?(:round)
       end
 
       # Check if current config has specific setting association.
@@ -152,7 +178,7 @@ class ScrapCbfRecord
       def team_assoc?
         return false unless @associations
 
-        @team_assoc ||= @associations.include?(:team)
+        @team_assoc ||= @associations.key?(:team)
       end
 
       # Check if current config has any association.

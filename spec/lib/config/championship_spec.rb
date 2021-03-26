@@ -61,9 +61,9 @@ RSpec.describe ScrapCbfRecord::Config::Championship do
         it { expect(subject.constant).to be(Championship) }
       end
 
-      describe 'self_assoc?' do
-        it { expect(subject.self_assoc?(:championship)).to be(true) }
-        it { expect(subject.self_assoc?(:another_class)).to be(false) }
+      describe 'record_is_a?' do
+        it { expect(subject.record_is_a?(:championship)).to be(true) }
+        it { expect(subject.record_is_a?(:another_class)).to be(false) }
       end
 
       describe 'championship_assoc?' do
