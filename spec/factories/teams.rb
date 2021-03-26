@@ -16,6 +16,10 @@ FactoryBot.define do
     avatar_url { 'avatar_url' }
   end
 
+  trait :club_flag_url do
+    club_flag_url { 'club_flag_url' }
+  end
+
   #
   ##################################################################
   #
@@ -26,7 +30,9 @@ FactoryBot.define do
     team_avatar_url
 
     initialize_with do
-      Team.where(name: 'Team').first_or_create
+      team = Team.where(name: 'Team').first
+
+      team || new(name: 'Team', state: 'state', avatar_url: 'avatar_url')
     end
   end
 
@@ -36,17 +42,20 @@ FactoryBot.define do
     team_avatar_url
 
     initialize_with do
-      Team.where(name: 'Team Opponent').first_or_create
+      team = Team.where(name: 'Team Opponent').first
+
+      team || new(name: 'Team Opponent', state: 'state', avatar_url: 'avatar_url')
     end
   end
 
   factory :team_renamed_club, class: Club do
     club_name { 'Club' }
-    team_state
     club_flag_url { 'club_flag_url' }
 
     initialize_with do
-      Club.where(club_name: 'Club').first_or_create
+      club = Club.where(club_name: 'Club').first
+
+      club || new(club_name: 'Club', club_flag_url: 'club_flag_url')
     end
   end
 end
