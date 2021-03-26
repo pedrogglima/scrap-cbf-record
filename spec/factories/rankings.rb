@@ -90,19 +90,14 @@ FactoryBot.define do
 
   factory :ranking_renamed_table_row, class: TableRow do
     association :cup, factory: :championship
-    association :team
-    association :next_opponent, factory: :team_opponent
+    association :rank_team, factory: :team
+    association :next_team_opponent, factory: :team_opponent
     ranking_rank
     ranking_pontos
     ranking_jogos
     ranking_vitorias
     ranking_empates
     ranking_derrotas
-    ranking_gols_pro
-    ranking_gols_contra
-    ranking_saldo_de_gols
-    ranking_cartoes_amarelos
-    ranking_cartoes_vermelhos
     ranking_aproveitamento
     ranking_recentes
   end
