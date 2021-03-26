@@ -86,46 +86,46 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
         end
       end
 
-      # context 'without associations' do
-      #   let(:round) { create(:round_without_association) }
+      context 'without associations' do
+        let(:round) { create(:round_without_association) }
 
-      #   before do
-      #     ScrapCbfRecord.settings do |config|
-      #       config.round.config = {
-      #         class_name: 'RoundWithoutAssociation',
-      #         rename_attrs: { serie: 'division' },
-      #         exclude_attrs_on_create: %i[],
-      #         exclude_attrs_on_update: %i[],
-      #         associations: {}
-      #       }
-      #     end
-      #   end
+        before do
+          ScrapCbfRecord.settings do |config|
+            config.round.config = {
+              class_name: 'RoundWithoutAssociation',
+              rename_attrs: { serie: 'division' },
+              exclude_attrs_on_create: %i[],
+              exclude_attrs_on_update: %i[],
+              associations: {}
+            }
+          end
+        end
 
-      #   context 'when not found' do
-      #     before do
-      #       championship
-      #       RoundWithoutAssociation.destroy_all
-      #     end
+        context 'when not found' do
+          before do
+            championship
+            RoundWithoutAssociation.destroy_all
+          end
 
-      #     it do
-      #       expect do
-      #         subject.create_unless_found(championship_hash)
-      #       end.to(change { RoundWithoutAssociation.count }.by(1))
-      #     end
-      #   end
+          it do
+            expect do
+              subject.create_unless_found(championship_hash)
+            end.to(change { RoundWithoutAssociation.count }.by(1))
+          end
+        end
 
-      #   context 'when found' do
-      #     before do
-      #       round
-      #     end
+        context 'when found' do
+          before do
+            round
+          end
 
-      #     it do
-      #       expect do
-      #         subject.create_unless_found(championship_hash)
-      #       end.to(change { RoundWithoutAssociation.count }.by(0))
-      #     end
-      #   end
-      # end
+          it do
+            expect do
+              subject.create_unless_found(championship_hash)
+            end.to(change { RoundWithoutAssociation.count }.by(0))
+          end
+        end
+      end
     end
   end
 
