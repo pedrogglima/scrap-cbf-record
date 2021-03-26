@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :ranking_hash_associations, class: Hash do
-    championship { create(:championship).id }
-    team { create(:team).id }
-    next_opponent { create(:team_opponent).id }
+    championship { create(:championship) }
+    team { create(:team) }
+    next_opponent { create(:team_opponent) }
 
     initialize_with do
       new({

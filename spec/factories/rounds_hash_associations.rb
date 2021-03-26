@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :round_hash_associations, class: Hash do
-    championship { create(:championship).id }
+    championship { create(:championship) }
 
     initialize_with do
       new({ championship: championship })
