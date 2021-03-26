@@ -12,7 +12,7 @@ class ScrapCbfRecord
 
         configurations = ScrapCbfRecord.config
 
-        super(configurations.match, *configurations.record_classes)
+        super(configurations.match, configurations)
 
         @matches = matches
       end
@@ -25,10 +25,11 @@ class ScrapCbfRecord
       # @return [Boolean] true if not exception is raise
       def create_or_update(championship_hash)
         championship = find_championship(championship_hash[:year])
+        serie = championship_hash[:serie]
 
         @matches.each do |hash|
-          match = find_match(hash[:id_match], championship)
-          round = find_round(hash[:round], championship)
+          match = find_match(hash[:id_match], championship, serie)
+          round = find_round(hash[:round], championship, serie)
           team = find_team(hash[:team])
           opponent = find_team(hash[:opponent])
 

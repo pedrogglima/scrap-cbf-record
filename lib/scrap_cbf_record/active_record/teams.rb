@@ -12,7 +12,7 @@ class ScrapCbfRecord
 
         configurations = ScrapCbfRecord.config
 
-        super(configurations.team, *configurations.record_classes)
+        super(configurations.team, configurations)
 
         @teams = teams
       end

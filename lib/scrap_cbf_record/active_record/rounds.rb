@@ -12,7 +12,7 @@ class ScrapCbfRecord
 
         configurations = ScrapCbfRecord.config
 
-        super(configurations.round, *configurations.record_classes)
+        super(configurations.round, configurations)
 
         @rounds = rounds
       end
@@ -25,9 +25,10 @@ class ScrapCbfRecord
       # @return [Boolean] true if not exception is raise
       def create_unless_found(championship_hash)
         championship = find_championship(championship_hash[:year])
+        serie = championship_hash[:serie]
 
         @rounds.each do |hash|
-          round = find_round(hash[:number], championship)
+          round = find_round(hash[:number], championship, serie)
           next if round
 
           hash = normalize_before_create(hash, { championship: championship })
