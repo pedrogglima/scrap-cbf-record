@@ -8,15 +8,13 @@ RSpec.describe ScrapCbfRecord::Config::Team do
       rename_attrs: {},
       exclude_attrs_on_create: %i[],
       exclude_attrs_on_update: %i[],
-      associations: %i[]
+      associations: {}
     }
   end
 
   let(:required) do
     {
-      must_not_rename_attrs: %i[id],
-      must_exclude_attrs: %i[],
-      must_keep_attrs: %i[id name]
+      must_exclude_attrs: %i[]
     }
   end
 
@@ -84,24 +82,12 @@ RSpec.describe ScrapCbfRecord::Config::Team do
         it { expect(subject.association?).to be(false) }
       end
 
-      describe 'must_not_rename_attrs' do
-        it do
-          expect(subject.must_not_rename_attrs).to(
-            eq(required[:must_not_rename_attrs])
-          )
-        end
-      end
-
       describe 'must_exclude_attrs' do
         it do
           expect(subject.must_exclude_attrs).to eq(
             required[:must_exclude_attrs]
           )
         end
-      end
-
-      describe 'must_keep_attrs' do
-        it { expect(subject.must_keep_attrs).to eq(required[:must_keep_attrs]) }
       end
     end
   end

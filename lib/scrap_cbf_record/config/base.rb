@@ -58,25 +58,11 @@ class ScrapCbfRecord
           default[:associations]
         end
 
-        # Returns the key :must_not_rename_attrs from the method required
-        #
-        # @return [Array] holding attrs that must not be renamed
-        def must_not_rename_attrs
-          required[:must_not_rename_attrs]
-        end
-
         # Returns the key :must_exclude_attrs from the method required
         #
         # @return [Array] holding attrs that must be excluded
         def must_exclude_attrs
           required[:must_exclude_attrs]
-        end
-
-        # Returns the key :must_keep_attrs from the method required
-        #
-        # @return [Array] holding attrs that must not be excluded
-        def must_keep_attrs
-          required[:must_keep_attrs]
         end
       end
 
@@ -176,25 +162,11 @@ class ScrapCbfRecord
         !@associations.empty?
       end
 
-      # Returns required must_not_rename_attrs
-      #
-      # @return [Array]
-      def must_not_rename_attrs
-        self.class.must_not_rename_attrs
-      end
-
       # Returns required must_exclude_attrs
       #
       # @return [Array]
       def must_exclude_attrs
         self.class.must_exclude_attrs
-      end
-
-      # Returns required must_keep_attrs
-      #
-      # @return [Array]
-      def must_keep_attrs
-        self.class.must_keep_attrs
       end
 
       def class_name_validation(class_name)
@@ -208,17 +180,6 @@ class ScrapCbfRecord
         rescue ::NameError
           raise_custom_name_error(class_name)
         end
-      end
-
-      private
-
-      def raise_custom_name_error(class_name)
-        raise ::NameError, "uninitialized constant #{class_name}. " \
-          'the classes needed by this gem need to be declared (see doc).'
-      end
-
-      def string?(var)
-        !var.nil? && (var.is_a?(String) || var.is_a?(Symbol))
       end
 
       def default_class_name
@@ -239,6 +200,17 @@ class ScrapCbfRecord
 
       def default_associations
         self.class.default_associations
+      end
+
+      private
+
+      def raise_custom_name_error(class_name)
+        raise ::NameError, "uninitialized constant #{class_name}. " \
+          'the classes needed by this gem need to be declared (see doc).'
+      end
+
+      def string?(var)
+        !var.nil? && (var.is_a?(String) || var.is_a?(Symbol))
       end
     end
   end

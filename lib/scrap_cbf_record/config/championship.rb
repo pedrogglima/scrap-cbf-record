@@ -14,7 +14,7 @@ class ScrapCbfRecord
             rename_attrs: {},
             exclude_attrs_on_create: %i[],
             exclude_attrs_on_update: %i[],
-            associations: %i[]
+            associations: {}
           }
         end
 
@@ -23,11 +23,7 @@ class ScrapCbfRecord
         #
         # @return [Hash]
         def required
-          {
-            must_not_rename_attrs: %i[id],
-            must_exclude_attrs: %i[],
-            must_keep_attrs: %i[id year]
-          }
+          { must_exclude_attrs: %i[] }
         end
       end
 

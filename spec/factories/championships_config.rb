@@ -13,7 +13,7 @@ FactoryBot.define do
       %i[]
     end
     associations do
-      %i[]
+      {}
     end
 
     initialize_with do

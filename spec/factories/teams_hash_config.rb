@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :ranking_config, class: Hash do
-    class_name { 'Ranking' }
+  factory :team_config, class: Hash do
+    class_name { 'Team' }
     rename_attrs do
       {}
     end
@@ -10,13 +10,10 @@ FactoryBot.define do
       %i[]
     end
     exclude_attrs_on_update do
-      %i[posicao]
+      %i[]
     end
     associations do
-      %i[
-        championship
-        team
-      ]
+      {}
     end
 
     initialize_with do

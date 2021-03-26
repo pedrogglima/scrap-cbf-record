@@ -12,9 +12,14 @@ class ScrapCbfRecord
           {
             class_name: 'Round',
             rename_attrs: {},
-            exclude_attrs_on_create: %i[],
+            exclude_attrs_on_create: %i[serie],
             exclude_attrs_on_update: %i[],
-            associations: %i[championship]
+            associations: {
+              championship: {
+                class_name: 'Championship',
+                foreign_key: :championship_id
+              }
+            }
           }
         end
 
@@ -23,11 +28,7 @@ class ScrapCbfRecord
         #
         # @return [Hash]
         def required
-          {
-            must_not_rename_attrs: %i[id],
-            must_exclude_attrs: %i[matches],
-            must_keep_attrs: %i[id number year]
-          }
+          { must_exclude_attrs: %i[matches] }
         end
       end
 

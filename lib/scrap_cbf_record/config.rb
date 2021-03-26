@@ -14,13 +14,13 @@ class ScrapCbfRecord
   # - which record attributes to exclude on create and update
   # - which record attributes to rename
   # Each of the configs are set for each record:
-  # - championship record
   # - match record
   # - ranking record
   # - round record
   # - team record
   class Config
     attr_accessor :championship,
+                  :serie,
                   :match,
                   :ranking,
                   :round,

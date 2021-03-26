@@ -2,31 +2,34 @@
 
 FactoryBot.define do
   factory :match_hash, class: Hash do
-    team { create(:team)[:name] }
-    opponent { create(:team_opponent)[:name] }
-    round { attributes_for(:round)[:number] }
-    id_match { 1 }
-    team_score { 1 }
-    opponent_score { 1 }
-    updates { 1 }
-    date { '12/03/2020 18:00' }
-    start_at { '18:00' }
-    place { 'Stadium Test' }
+    championship_year
+    championship_serie
+    match_team
+    match_opponent
+    match_round
+    match_id_match
+    match_team_score
+    match_opponent_score
+    match_updates
+    match_date
+    match_start_at
+    match_place
 
-    initialize_with {
+    initialize_with do
       new({
-
-        team: team,
-        opponent: opponent,
-        round: round,
-        id_match: id_match,
-        team_score: team_score,
-        opponent_score: opponent_score,
-        updates: updates,
-        date: date,
-        start_at: start_at,
-        place: place
-      })
-    }
+            championship: championship_year,
+            serie: championship_serie,
+            team: match_team,
+            opponent: match_opponent,
+            round: match_round,
+            id_match: match_id_match,
+            team_score: match_team_score,
+            opponent_score: match_opponent_score,
+            updates: match_updates,
+            date: match_date,
+            start_at: match_start_at,
+            place: match_place
+          })
+    end
   end
 end

@@ -1,38 +1,33 @@
 # frozen_string_literal: true
-class TeamHash
-  attr_accessor :name,
-                :state,
-                :avatar_url 
-end
 
 FactoryBot.define do
-  factory :team_hash, class: TeamHash do
-    name { attributes_for(:team)[:name] }
-    state { 'state_1' }
-    avatar_url { 'avatar_url_1' }
-    
-    initialize_with { 
+  factory :team_hash, class: Hash do
+    team_name
+    team_state
+    team_avatar_url
+
+    initialize_with do
       new(
-        name: name,
-        state: state,
-        avatar_url: avatar_url
-      ) 
-    }
+        name: team_name,
+        state: team_state,
+        avatar_url: team_avatar_url
+      )
+    end
   end
 end
 
 FactoryBot.define do
-  factory :team_opponent_hash, class: TeamHash do
-    name { attributes_for(:team_opponent)[:name] }
-    state { 'state_1' }
-    avatar_url { 'avatar_url_1' }
-    
-    initialize_with { 
+  factory :team_opponent_hash, class: Hash do
+    team_opponent_name
+    team_state
+    team_avatar_url
+
+    initialize_with do
       new(
-        name: name,
-        state: state,
-        avatar_url: avatar_url
-      ) 
-    }
+        name: team_opponent_name,
+        state: team_state,
+        avatar_url: team_avatar_url
+      )
+    end
   end
 end

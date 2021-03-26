@@ -2,18 +2,22 @@
 
 FactoryBot.define do
   factory :round_hash, class: Hash do
-    number { 1 }
+    round_number
+    championship_year
+    championship_serie
     matches do
       [
         attributes_for(:match_hash)
       ]
     end
-    
-    initialize_with { 
+
+    initialize_with do
       new({
-        number: number,
-        matches: matches
-      }) 
-    }
+            number: round_number,
+            championship: championship_year,
+            serie: championship_serie,
+            matches: matches
+          })
+    end
   end
 end

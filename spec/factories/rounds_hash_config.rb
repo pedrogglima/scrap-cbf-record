@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :team_config, class: Hash do
-    class_name { 'Team' }
+  factory :round_config, class: Hash do
+    class_name { 'Round' }
     rename_attrs do
       {}
     end
@@ -13,7 +13,12 @@ FactoryBot.define do
       %i[]
     end
     associations do
-      %i[]
+      {
+        championship: {
+          class_name: 'Championship',
+          foreign_key: :championship_id
+        }
+      }
     end
 
     initialize_with do

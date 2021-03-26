@@ -6,22 +6,32 @@ RSpec.describe ScrapCbfRecord::Config::Match do
     {
       class_name: 'Match',
       rename_attrs: {},
-      exclude_attrs_on_create: %i[],
-      exclude_attrs_on_update: %i[],
-      associations: %i[
-        championship
-        round
-        team
-        opponent
-      ]
+      exclude_attrs_on_create: %i[serie],
+      exclude_attrs_on_update: %i[serie],
+      associations: {
+        championship: {
+          class_name: 'Championship',
+          foreign_key: :championship_id
+        },
+        round: {
+          class_name: 'Round',
+          foreign_key: :round_id
+        },
+        team: {
+          class_name: 'Team',
+          foreign_key: :team_id
+        },
+        opponent: {
+          class_name: 'Team',
+          foreign_key: :opponent_id
+        }
+      }
     }
   end
 
   let(:required) do
     {
-      must_not_rename_attrs: %i[id],
-      must_exclude_attrs: %i[],
-      must_keep_attrs: %i[id id_match]
+      must_exclude_attrs: %i[]
     }
   end
 
@@ -89,24 +99,12 @@ RSpec.describe ScrapCbfRecord::Config::Match do
         it { expect(subject.association?).to be(true) }
       end
 
-      describe 'must_not_rename_attrs' do
-        it do
-          expect(subject.must_not_rename_attrs).to(
-            eq(required[:must_not_rename_attrs])
-          )
-        end
-      end
-
       describe 'must_exclude_attrs' do
         it do
           expect(subject.must_exclude_attrs).to eq(
             required[:must_exclude_attrs]
           )
         end
-      end
-
-      describe 'must_keep_attrs' do
-        it { expect(subject.must_keep_attrs).to eq(required[:must_keep_attrs]) }
       end
     end
   end

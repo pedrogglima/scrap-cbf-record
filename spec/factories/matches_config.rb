@@ -13,11 +13,24 @@ FactoryBot.define do
       %i[id_match]
     end
     associations do
-      %i[
-        championship
-        round
-        team
-      ]
+      {
+        championship: {
+          class_name: 'Championship',
+          foreign_key: :championship_id
+        },
+        round: {
+          class_name: 'Round',
+          foreign_key: :round_id
+        },
+        team: {
+          class_name: 'Team',
+          foreign_key: :team_id
+        },
+        opponent: {
+          class_name: 'Team',
+          foreign_key: :opponent_id
+        }
+      }
     end
 
     initialize_with do

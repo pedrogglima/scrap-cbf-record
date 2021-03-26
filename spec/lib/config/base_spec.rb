@@ -44,19 +44,7 @@ RSpec.describe ScrapCbfRecord::Config::Base do
     describe 'required_<configs_attrs>' do
       it do
         expect do
-          klass.must_not_rename_attrs
-        end.to raise_error(NotImplementedError)
-      end
-
-      it do
-        expect do
           klass.must_exclude_attrs
-        end.to raise_error(NotImplementedError)
-      end
-
-      it do
-        expect do
-          klass.must_keep_attrs
         end.to raise_error(NotImplementedError)
       end
     end
