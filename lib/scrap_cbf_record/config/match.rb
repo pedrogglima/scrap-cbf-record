@@ -64,17 +64,22 @@ class ScrapCbfRecord
       end
 
       # These method receives the users settings
+      # Missing settings are left as default
       #
       # @param [config] Hash contaning the settings
       # @return [nil]
       def config=(config)
         raise ::ArgumentError, 'config must be a Hash' unless config.is_a?(Hash)
 
-        @class_name = config[:class_name]
-        @rename_attrs = config[:rename_attrs]
-        @exclude_attrs_on_create = config[:exclude_attrs_on_create]
-        @exclude_attrs_on_update = config[:exclude_attrs_on_update]
-        @associations = config[:associations]
+        @class_name = config[:class_name] if config[:class_name]
+        @rename_attrs = config[:rename_attrs] if config[:rename_attrs]
+        if config[:exclude_attrs_on_create]
+          @exclude_attrs_on_create = config[:exclude_attrs_on_create]
+        end
+        if config[:exclude_attrs_on_update]
+          @exclude_attrs_on_update = config[:exclude_attrs_on_update]
+        end
+        @associations = config[:associations] if config[:associations]
 
         super(*configs)
       end
