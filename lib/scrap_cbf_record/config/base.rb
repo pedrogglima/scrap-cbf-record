@@ -129,7 +129,7 @@ class ScrapCbfRecord
       end
 
       # Check if attribute was renamed.
-      # It will search the attrs and associations on the calling class
+      # It will search on attrs and associations for the calling class
       # If not found returns the attribute
       #
       # @param [attribute] the attribute to be searched on the calling class
