@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'config/base'
-require_relative 'config/championship'
-require_relative 'config/match'
-require_relative 'config/ranking'
-require_relative 'config/round'
-require_relative 'config/team'
 require 'singleton'
+
+require_relative 'configs/base'
+require_relative 'configs/championship'
+require_relative 'configs/match'
+require_relative 'configs/ranking'
+require_relative 'configs/round'
+require_relative 'configs/team'
 
 class ScrapCbfRecord
   # This class is responsible for holding the configs on how records

@@ -2,6 +2,7 @@
 
 class ScrapCbfRecord
   class ActiveRecord
+    # Superclass for the classes lib/active_records/<record>.rb
     class Base
       def initialize(current_config, config)
         # classes set by users

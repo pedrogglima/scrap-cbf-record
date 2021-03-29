@@ -4,11 +4,11 @@ require 'json'
 require 'active_support/core_ext/hash/indifferent_access'
 require 'active_support/core_ext/hash/except'
 
-require_relative 'active_record/base'
-require_relative 'active_record/matches'
-require_relative 'active_record/rankings'
-require_relative 'active_record/rounds'
-require_relative 'active_record/teams'
+require_relative 'active_records/base'
+require_relative 'active_records/matches'
+require_relative 'active_records/rankings'
+require_relative 'active_records/rounds'
+require_relative 'active_records/teams'
 
 class ScrapCbfRecord
   # This module uses Active Record module to save data on database.
