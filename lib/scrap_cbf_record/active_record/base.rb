@@ -30,11 +30,19 @@ class ScrapCbfRecord
         @exclude_attrs_on_update = @current_config.exclude_attrs_on_update
         @rename_attrs = @current_config.rename_attrs
 
-        # current configs required by the lib
+        # current configs required by the system
         #
         @must_exclude_attrs = @current_config.must_exclude_attrs
       end
 
+      # Normalize, on create, the new record with:
+      # Setting Associations
+      # Rename attributes
+      # Exclusion of attributes
+      #
+      # @param [Hash] contaning the new record
+      # @param [Hash] contaning the existent record's associations
+      # @return [Hash] normalized
       def normalize_before_create(hash, assocs = {})
         hash = include_associations(
           hash,
@@ -54,6 +62,14 @@ class ScrapCbfRecord
         hash
       end
 
+      # Normalize, on update, the new record with:
+      # Setting Associations
+      # Rename attributes
+      # Exclusion of attributes
+      #
+      # @param [Hash] contaning the new record
+      # @param [Hash] contaning the existent record's associations
+      # @return [Hash] normalized
       def normalize_before_update(hash, assocs = {})
         hash = include_associations(
           hash,
