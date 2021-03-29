@@ -5,7 +5,7 @@ require_relative 'scrap_cbf_record/errors'
 require_relative 'scrap_cbf_record/config'
 require_relative 'scrap_cbf_record/active_record'
 
-# This module saves the output from the gem ScrapCbf on database
+# This module saves on database the output from the gem ScrapCbf
 # It has two modules to accomplish that:
 # - config: holds the settings for how to save the data
 # - records: responsible for saving the data on database.
@@ -17,7 +17,7 @@ require_relative 'scrap_cbf_record/active_record'
 # - round
 # - team
 #
-# There records are:
+# The records are:
 # - matches: saves the matches for a specific championship
 # - rankings: saves the rankings for a specific championship
 # - rounds: saves the rounds for a specific championship
@@ -43,6 +43,8 @@ class ScrapCbfRecord
     #     associations: %i[]
     #   }
     #
+    # If not set, a default settings will be used
+    #
     #   config.match = { ... }
     #   config.ranking = { ... }
     #   config.round = { ... }
@@ -51,7 +53,7 @@ class ScrapCbfRecord
     #
     # @return [ScrapCbfRecord::Config]
     def settings
-      configuration = Config.new
+      configuration = Config.instance
 
       yield configuration if block_given?
 

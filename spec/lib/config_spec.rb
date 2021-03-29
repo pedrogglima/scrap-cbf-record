@@ -15,7 +15,19 @@ RSpec.describe ScrapCbfRecord::Config do
   let(:round_config) { klass::Round }
   let(:team_config) { klass::Team }
 
-  subject { klass.new }
+  describe 'class methods' do
+    subject { klass }
+
+    describe 'instance' do
+      it { expect(subject.instance).to(be_a(klass)) }
+    end
+
+    describe 'new' do
+      it { expect { subject.new }.to(raise_error(NoMethodError)) }
+    end
+  end
+
+  subject { klass.instance }
 
   describe 'initialize' do
     it { expect(subject.championship).to(be_a(championship_config)) }
@@ -26,6 +38,8 @@ RSpec.describe ScrapCbfRecord::Config do
   end
 
   describe 'record_classes' do
+    subject { klass.instance }
+
     it { expect(subject.record_classes).to be_a(Array) }
     it { expect(subject.record_classes).to include(championship_class) }
     it { expect(subject.record_classes).to include(match_class) }

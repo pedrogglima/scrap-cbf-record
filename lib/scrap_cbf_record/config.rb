@@ -6,6 +6,7 @@ require_relative 'config/match'
 require_relative 'config/ranking'
 require_relative 'config/round'
 require_relative 'config/team'
+require 'singleton'
 
 class ScrapCbfRecord
   # This class is responsible for holding the configs on how records
@@ -19,19 +20,26 @@ class ScrapCbfRecord
   # - round record
   # - team record
   class Config
-    attr_accessor :championship,
-                  :match,
-                  :ranking,
-                  :round,
-                  :team
+    include Singleton
 
-    # @return [ScrapCbfRecord::Config]
-    def initialize
-      @championship = Championship.new
-      @match = Match.new
-      @ranking = Ranking.new
-      @round = Round.new
-      @team = Team.new
+    def championship
+      @championship ||= Championship.new
+    end
+
+    def match
+      @match ||= Match.new
+    end
+
+    def ranking
+      @ranking ||= Ranking.new
+    end
+
+    def round
+      @round ||= Round.new
+    end
+
+    def team
+      @team ||= Team.new
     end
 
     # Return an array with all record classes
@@ -46,5 +54,15 @@ class ScrapCbfRecord
         @team.constant
       ]
     end
+
+    def restore
+      @championship = Championship.new
+      @match = Match.new
+      @ranking = Ranking.new
+      @round = Round.new
+      @team = Team.new
+    end
+
+    private_class_method :new
   end
 end
