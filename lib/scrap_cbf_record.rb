@@ -6,11 +6,12 @@ require_relative 'scrap_cbf_record/config'
 require_relative 'scrap_cbf_record/active_record'
 
 # This module saves on database the output from the gem ScrapCbf
+#
 # It has two modules to accomplish that:
-# - config: holds the settings for how to save the data
+# - configs: holds the settings for how to save the data
 # - records: responsible for saving the data on database.
 #
-# There config are divided in:
+# There configs are:
 # - championship
 # - match
 # - ranking
@@ -34,22 +35,22 @@ class ScrapCbfRecord
     # Sets the global configurations
     # We can set the configurations in the following way:
     #
-    # ScrapCbfRecord.settings do |config|
-    #   config.championship = {
-    #     class_name: 'Championship'
-    #     rename_attrs: {},
-    #     exclude_attrs_on_create: %i[],
-    #     exclude_attrs_on_update: %i[],
-    #     associations: %i[]
-    #   }
+    #   ScrapCbfRecord.settings do |config|
+    #     config.championship = {
+    #       class_name: 'Championship'
+    #       rename_attrs: {},
+    #       exclude_attrs_on_create: %i[],
+    #       exclude_attrs_on_update: %i[],
+    #       associations: %i[]
+    #     }
     #
-    # If not set, a default settings will be used
-    #
-    #   config.match = { ... }
-    #   config.ranking = { ... }
-    #   config.round = { ... }
-    #   config.team = { ... }
-    # end
+    #     config.match = { ... }
+    #     config.ranking = { ... }
+    #     config.round = { ... }
+    #     config.team = { ... }
+    #   end
+    # If a config or a config's attribute was not set,
+    # default setting will be used
     #
     # @return [ScrapCbfRecord::Config]
     def settings
