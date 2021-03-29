@@ -28,7 +28,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
 
       context 'when there are rankings' do
         let(:ranking_hash) do
-          attributes_for(:ranking_hash, pontos: 20)
+          attributes_for(:ranking_hash, points: 20)
         end
         let(:array_rankings) { [ranking_hash] }
         let(:ranking) do
@@ -37,7 +37,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
             championship_id: championship.id,
             team_id: team.id,
             next_opponent_id: next_opponent.id,
-            pontos: 20
+            points: 20
           )
         end
 
@@ -49,7 +49,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
           ranking # create before update
 
           subject.create_or_update(championship_hash)
-          expect(ranking.reload.pontos).to(eq(20))
+          expect(ranking.reload.points).to(eq(20))
         end
       end
     end
@@ -63,22 +63,22 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
             ScrapCbfRecord.settings do |config|
               config.ranking.config = {
                 class_name: 'TableRow',
-                rename_attrs: { posicao: 'rank' },
+                rename_attrs: { position: 'rank' },
                 exclude_attrs_on_create: %i[
                   serie
-                  gols_pro
-                  gols_contra
-                  saldo_de_gols
-                  cartoes_amarelos
-                  cartoes_vermelhos
+                  goals_for
+                  goals_against
+                  goal_difference
+                  yellow_card
+                  red_card
                 ],
                 exclude_attrs_on_update: %i[
                   serie
-                  gols_pro
-                  gols_contra
-                  saldo_de_gols
-                  cartoes_amarelos
-                  cartoes_vermelhos
+                  goals_for
+                  goals_against
+                  goal_difference
+                  yellow_card
+                  red_card
                 ],
                 associations: {
                   championship: {
@@ -107,7 +107,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
 
         context 'when there are rankings' do
           let(:ranking_hash) do
-            attributes_for(:ranking_hash, pontos: 20)
+            attributes_for(:ranking_hash, points: 20)
           end
           let(:array_rankings) { [ranking_hash] }
           let(:table_row) do
@@ -116,7 +116,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
               cup_id: championship.id,
               rank_team_id: team.id,
               next_team_opponent_id: next_opponent.id,
-              pontos: 10
+              points: 10
             )
           end
 
@@ -126,23 +126,23 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
             ScrapCbfRecord.settings do |config|
               config.ranking.config = {
                 class_name: 'TableRow',
-                rename_attrs: { posicao: 'rank' },
+                rename_attrs: { position: 'rank' },
                 exclude_attrs_on_create: %i[
                   serie
-                  gols_pro
-                  gols_contra
-                  saldo_de_gols
-                  cartoes_amarelos
-                  cartoes_vermelhos
+                  goals_for
+                  goals_against
+                  goal_difference
+                  yellow_card
+                  red_card
                 ],
                 exclude_attrs_on_update: %i[
                   serie
                   serie
-                  gols_pro
-                  gols_contra
-                  saldo_de_gols
-                  cartoes_amarelos
-                  cartoes_vermelhos
+                  goals_for
+                  goals_against
+                  goal_difference
+                  yellow_card
+                  red_card
                 ],
                 associations: {
                   championship: {
@@ -166,7 +166,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
             table_row # create before update
 
             subject.create_or_update(championship_hash)
-            expect(table_row.reload.pontos).to(eq(20))
+            expect(table_row.reload.points).to(eq(20))
           end
         end
       end
@@ -196,11 +196,11 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
 
         context 'when there are rankings' do
           let(:ranking_hash) do
-            attributes_for(:ranking_hash, pontos: 20)
+            attributes_for(:ranking_hash, points: 20)
           end
           let(:array_rankings) { [ranking_hash] }
           let(:ranking_without_association) do
-            create(:ranking_without_association, pontos: 20)
+            create(:ranking_without_association, points: 20)
           end
 
           before do
@@ -221,7 +221,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
             ranking_without_association # create before update
 
             subject.create_or_update(championship_hash)
-            expect(ranking_without_association.reload.pontos).to(eq(20))
+            expect(ranking_without_association.reload.points).to(eq(20))
           end
         end
       end
@@ -238,23 +238,22 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
           ScrapCbfRecord.settings do |config|
             config.ranking.config = {
               class_name: 'TableRow',
-              rename_attrs: { posicao: 'rank' },
+              rename_attrs: { position: 'rank' },
               exclude_attrs_on_create: %i[
                 serie
-                gols_pro
-                gols_contra
-                saldo_de_gols
-                cartoes_amarelos
-                cartoes_vermelhos
+                goals_for
+                goals_against
+                goal_difference
+                yellow_card
+                red_card
               ],
               exclude_attrs_on_update: %i[
                 serie
-                serie
-                gols_pro
-                gols_contra
-                saldo_de_gols
-                cartoes_amarelos
-                cartoes_vermelhos
+                goals_for
+                goals_against
+                goal_difference
+                yellow_card
+                red_card
               ],
               associations: {
                 championship: {
@@ -328,23 +327,22 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
           ScrapCbfRecord.settings do |config|
             config.ranking.config = {
               class_name: 'TableRow',
-              rename_attrs: { posicao: 'rank' },
+              rename_attrs: { position: 'rank' },
               exclude_attrs_on_create: %i[
                 serie
-                gols_pro
-                gols_contra
-                saldo_de_gols
-                cartoes_amarelos
-                cartoes_vermelhos
+                goals_for
+                goals_against
+                goal_difference
+                yellow_card
+                red_card
               ],
               exclude_attrs_on_update: %i[
                 serie
-                serie
-                gols_pro
-                gols_contra
-                saldo_de_gols
-                cartoes_amarelos
-                cartoes_vermelhos
+                goals_for
+                goals_against
+                goal_difference
+                yellow_card
+                red_card
               ],
               associations: {
                 championship: {

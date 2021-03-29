@@ -1,60 +1,60 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  trait :ranking_posicao do
-    posicao { 1 }
+  trait :ranking_position do
+    position { 1 }
   end
 
   trait :ranking_rank do
     rank { 1 }
   end
 
-  trait :ranking_pontos do
-    pontos { 10 }
+  trait :ranking_points do
+    points { 10 }
   end
 
-  trait :ranking_jogos do
-    jogos { 10 }
+  trait :ranking_played do
+    played { 10 }
   end
 
-  trait :ranking_vitorias do
-    vitorias { 10 }
+  trait :ranking_won do
+    won { 10 }
   end
 
-  trait :ranking_empates do
-    empates { 10 }
+  trait :ranking_drawn do
+    drawn { 10 }
   end
 
-  trait :ranking_derrotas do
-    derrotas { 10 }
+  trait :ranking_lost do
+    lost { 10 }
   end
 
-  trait :ranking_gols_pro do
-    gols_pro { 10 }
+  trait :ranking_goals_for do
+    goals_for { 10 }
   end
 
-  trait :ranking_gols_contra do
-    gols_contra { 10 }
+  trait :ranking_goals_against do
+    goals_against { 10 }
   end
 
-  trait :ranking_saldo_de_gols do
-    saldo_de_gols { 10 }
+  trait :ranking_goal_difference do
+    goal_difference { 10 }
   end
 
-  trait :ranking_cartoes_amarelos do
-    cartoes_amarelos { 10 }
+  trait :ranking_yellow_cards do
+    yellow_card { 10 }
   end
 
-  trait :ranking_cartoes_vermelhos do
-    cartoes_vermelhos { 10 }
+  trait :ranking_red_cards do
+    red_card { 10 }
   end
 
-  trait :ranking_aproveitamento do
-    aproveitamento { 10 }
+  trait :ranking_advantages do
+    advantages { 10 }
   end
 
-  trait :ranking_recentes do
-    recentes { 'VVV' }
+  trait :ranking_form do
+    form { 'VVV' }
   end
 
   trait :ranking_team do
@@ -73,19 +73,19 @@ FactoryBot.define do
     association :championship
     association :team
     association :next_opponent, factory: :team_opponent
-    ranking_posicao
-    ranking_pontos
-    ranking_jogos
-    ranking_vitorias
-    ranking_empates
-    ranking_derrotas
-    ranking_gols_pro
-    ranking_gols_contra
-    ranking_saldo_de_gols
-    ranking_cartoes_amarelos
-    ranking_cartoes_vermelhos
-    ranking_aproveitamento
-    ranking_recentes
+    ranking_position
+    ranking_points
+    ranking_played
+    ranking_won
+    ranking_drawn
+    ranking_lost
+    ranking_goals_for
+    ranking_goals_against
+    ranking_goal_difference
+    ranking_yellow_cards
+    ranking_red_cards
+    ranking_advantages
+    ranking_form
   end
 
   factory :ranking_renamed_table_row, class: TableRow do
@@ -93,13 +93,13 @@ FactoryBot.define do
     association :rank_team, factory: :team
     association :next_team_opponent, factory: :team_opponent
     ranking_rank
-    ranking_pontos
-    ranking_jogos
-    ranking_vitorias
-    ranking_empates
-    ranking_derrotas
-    ranking_aproveitamento
-    ranking_recentes
+    ranking_points
+    ranking_played
+    ranking_won
+    ranking_drawn
+    ranking_lost
+    ranking_advantages
+    ranking_form
   end
 
   factory :ranking_without_association, class: RankingWithoutAssociation do
@@ -107,18 +107,18 @@ FactoryBot.define do
     championship_serie
     ranking_team
     ranking_next_opponent
-    ranking_posicao
-    ranking_pontos
-    ranking_jogos
-    ranking_vitorias
-    ranking_empates
-    ranking_derrotas
-    ranking_gols_pro
-    ranking_gols_contra
-    ranking_saldo_de_gols
-    ranking_cartoes_amarelos
-    ranking_cartoes_vermelhos
-    ranking_aproveitamento
-    ranking_recentes
+    ranking_position
+    ranking_points
+    ranking_played
+    ranking_won
+    ranking_drawn
+    ranking_lost
+    ranking_goals_for
+    ranking_goals_against
+    ranking_goal_difference
+    ranking_yellow_cards
+    ranking_red_cards
+    ranking_advantages
+    ranking_form
   end
 end

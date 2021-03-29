@@ -123,24 +123,24 @@ class ScrapCbfRecord
         )
       end
 
-      def find_ranking(posicao, championship, serie)
+      def find_ranking(position, championship, serie)
         if @current_config.championship_assoc?
-          find_ranking_with_association_fk(posicao, championship)
+          find_ranking_with_association_fk(position, championship)
         else
-          find_ranking_without_association_fk(posicao, championship, serie)
+          find_ranking_without_association_fk(position, championship, serie)
         end
       end
 
-      def find_ranking_with_association_fk(posicao, championship)
+      def find_ranking_with_association_fk(position, championship)
         @class_ranking.find_by(
-          "#{@config_ranking.searchable_attr(:posicao)}": posicao,
+          "#{@config_ranking.searchable_attr(:position)}": position,
           "#{@config_ranking.searchable_attr(:championship_id)}": championship.id
         )
       end
 
-      def find_ranking_without_association_fk(posicao, championship, serie)
+      def find_ranking_without_association_fk(position, championship, serie)
         @class_ranking.find_by(
-          "#{@config_ranking.searchable_attr(:posicao)}": posicao,
+          "#{@config_ranking.searchable_attr(:position)}": position,
           "#{@config_ranking.searchable_attr(:championship)}": championship,
           "#{@config_ranking.searchable_attr(:serie)}": serie
         )

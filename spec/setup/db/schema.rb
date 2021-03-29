@@ -88,19 +88,19 @@ ActiveRecord::Schema.define do
     t.bigint 'championship_id', null: false
     t.bigint 'team_id', null: false
     t.bigint 'next_opponent_id'
-    t.integer 'posicao', null: false
-    t.integer 'pontos', null: false
-    t.integer 'jogos', null: false
-    t.integer 'vitorias', null: false
-    t.integer 'empates', null: false
-    t.integer 'derrotas', null: false
-    t.integer 'gols_pro', null: false
-    t.integer 'gols_contra', null: false
-    t.integer 'saldo_de_gols', null: false
-    t.integer 'cartoes_amarelos', null: false
-    t.integer 'cartoes_vermelhos', null: false
-    t.integer 'aproveitamento', null: false
-    t.string 'recentes', null: false
+    t.integer 'position', null: false
+    t.integer 'points', null: false
+    t.integer 'played', null: false
+    t.integer 'won', null: false
+    t.integer 'drawn', null: false
+    t.integer 'lost', null: false
+    t.integer 'goals_for', null: false
+    t.integer 'goals_against', null: false
+    t.integer 'goal_difference', null: false
+    t.integer 'yellow_card', null: false
+    t.integer 'red_card', null: false
+    t.integer 'advantages', null: false
+    t.string 'form', null: false
 
     t.timestamps
   end
@@ -110,13 +110,13 @@ ActiveRecord::Schema.define do
     t.bigint 'rank_team_id', null: false
     t.bigint 'next_team_opponent_id'
     t.integer 'rank', null: false
-    t.integer 'pontos', null: false
-    t.integer 'jogos', null: false
-    t.integer 'vitorias', null: false
-    t.integer 'empates', null: false
-    t.integer 'derrotas', null: false
-    t.integer 'aproveitamento', null: false
-    t.string 'recentes', null: false
+    t.integer 'points', null: false
+    t.integer 'played', null: false
+    t.integer 'won', null: false
+    t.integer 'drawn', null: false
+    t.integer 'lost', null: false
+    t.integer 'advantages', null: false
+    t.string 'form', null: false
 
     t.timestamps
   end
@@ -126,19 +126,19 @@ ActiveRecord::Schema.define do
     t.string 'serie', null: false
     t.bigint 'team', null: false
     t.bigint 'next_opponent'
-    t.integer 'posicao', null: false
-    t.integer 'pontos', null: false
-    t.integer 'jogos', null: false
-    t.integer 'vitorias', null: false
-    t.integer 'empates', null: false
-    t.integer 'derrotas', null: false
-    t.integer 'gols_pro', null: false
-    t.integer 'gols_contra', null: false
-    t.integer 'saldo_de_gols', null: false
-    t.integer 'cartoes_amarelos', null: false
-    t.integer 'cartoes_vermelhos', null: false
-    t.integer 'aproveitamento', null: false
-    t.string 'recentes', null: false
+    t.integer 'position', null: false
+    t.integer 'points', null: false
+    t.integer 'played', null: false
+    t.integer 'won', null: false
+    t.integer 'drawn', null: false
+    t.integer 'lost', null: false
+    t.integer 'goals_for', null: false
+    t.integer 'goals_against', null: false
+    t.integer 'goal_difference', null: false
+    t.integer 'yellow_card', null: false
+    t.integer 'red_card', null: false
+    t.integer 'advantages', null: false
+    t.string 'form', null: false
 
     t.timestamps
   end

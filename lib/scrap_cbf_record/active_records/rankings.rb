@@ -28,7 +28,7 @@ class ScrapCbfRecord
         serie = championship_hash[:serie]
 
         @rankings.each do |hash|
-          ranking = find_ranking(hash[:posicao], championship, serie)
+          ranking = find_ranking(hash[:position], championship, serie)
           team = find_team(hash[:team])
           next_opponent = find_team(hash[:next_opponent])
 
