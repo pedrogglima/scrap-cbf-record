@@ -55,12 +55,17 @@ class ScrapCbfRecord
       ]
     end
 
+    # Restaure configs to default
+    #
+    # @return [Boolean] true if works
     def restore
       @championship = Championship.new
       @match = Match.new
       @ranking = Ranking.new
       @round = Round.new
       @team = Team.new
+
+      true
     end
 
     private_class_method :new
