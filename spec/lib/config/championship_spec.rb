@@ -18,11 +18,17 @@ RSpec.describe ScrapCbfRecord::Config::Championship do
     }
   end
 
+  let(:record_attrs) { build(:championships_attrs) }
+
   subject { klass.new }
 
   describe 'class methods ' do
     describe 'default' do
       it { expect(klass.default).to(eq(default_config)) }
+    end
+
+    describe 'record_attrs' do
+      it { expect(klass.record_attrs).to(eq(record_attrs)) }
     end
   end
 
@@ -147,5 +153,9 @@ RSpec.describe ScrapCbfRecord::Config::Championship do
         it { expect(subject.team_assoc?).to be(false) }
       end
     end
+  end
+
+  describe 'record_attrs' do
+    it { expect(subject.record_attrs).to(eq(record_attrs)) }
   end
 end

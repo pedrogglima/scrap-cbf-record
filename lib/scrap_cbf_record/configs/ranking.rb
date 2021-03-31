@@ -38,6 +38,32 @@ class ScrapCbfRecord
         def required
           { must_exclude_attrs: %i[] }
         end
+
+        # Record Attributes
+        # It must match with ScrapCbf
+        #
+        # @return [Array]
+        def record_attrs
+          %i[
+            championship
+            serie
+            position
+            team
+            points
+            played
+            won
+            drawn
+            lost
+            goals_for
+            goals_against
+            goal_difference
+            yellow_card
+            red_card
+            advantages
+            form
+            next_opponent
+          ]
+        end
       end
 
       attr_reader :class_name,

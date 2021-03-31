@@ -26,6 +26,18 @@ class ScrapCbfRecord
         def required
           { must_exclude_attrs: %i[] }
         end
+
+        # Record Attributes
+        # It must match with ScrapCbf
+        #
+        # @return [Array]
+        def record_attrs
+          %i[
+            name
+            state
+            avatar_url
+          ]
+        end
       end
 
       attr_reader :class_name,

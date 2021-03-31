@@ -35,11 +35,17 @@ RSpec.describe ScrapCbfRecord::Config::Match do
     }
   end
 
+  let(:record_attrs) { build(:matches_attrs) }
+
   subject { klass.new }
 
   describe 'class methods ' do
     describe 'default' do
       it { expect(klass.default).to(eq(default_config)) }
+    end
+
+    describe 'record_attrs' do
+      it { expect(klass.record_attrs).to(eq(record_attrs)) }
     end
   end
 
@@ -164,5 +170,9 @@ RSpec.describe ScrapCbfRecord::Config::Match do
         it { expect(subject.team_assoc?).to be(true) }
       end
     end
+  end
+
+  describe 'record_attrs' do
+    it { expect(subject.record_attrs).to(eq(record_attrs)) }
   end
 end
