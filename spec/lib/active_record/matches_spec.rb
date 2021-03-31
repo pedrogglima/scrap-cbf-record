@@ -209,6 +209,29 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
           end
         end
       end
+
+      # Raised when ActiveRecord method valid? is false before saving
+      context 'when record is invalid' do
+        let(:invalid_hash) { attributes_for(:invalid_match_hash) }
+
+        subject { ScrapCbfRecord::ActiveRecord::Matches.new([invalid_hash]) }
+
+        before do
+          ScrapCbfRecord.settings do |config|
+            config.match.config = {
+              class_name: 'MatchWithValidation'
+            }
+          end
+
+          Match.destroy_all
+        end
+
+        it do
+          expect do
+            subject.create_or_update(championship_hash)
+          end.to(raise_error ScrapCbfRecord::ActiveRecordValidationError)
+        end
+      end
     end
   end
 

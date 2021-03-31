@@ -127,6 +127,29 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
         end
       end
     end
+
+    # Raised when ActiveRecord method valid? is false before saving
+    context 'when record is invalid' do
+      let(:invalid_hash) { attributes_for(:invalid_round_hash) }
+
+      subject { ScrapCbfRecord::ActiveRecord::Rounds.new([invalid_hash]) }
+
+      before do
+        ScrapCbfRecord.settings do |config|
+          config.round.config = {
+            class_name: 'RoundWithValidation'
+          }
+        end
+
+        Round.destroy_all
+      end
+
+      it do
+        expect do
+          subject.create_unless_found(championship_hash)
+        end.to(raise_error ScrapCbfRecord::ActiveRecordValidationError)
+      end
+    end
   end
 
   describe 'normalize_before_create' do

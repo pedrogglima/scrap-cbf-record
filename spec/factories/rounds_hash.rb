@@ -10,14 +10,15 @@ FactoryBot.define do
         attributes_for(:match_hash)
       ]
     end
+  end
 
-    initialize_with do
-      new({
-            number: round_number,
-            championship: championship_year,
-            serie: championship_serie,
-            matches: matches
-          })
+  factory :invalid_round_hash, class: Hash do
+    championship_year
+    championship_serie
+    matches do
+      [
+        attributes_for(:match_hash)
+      ]
     end
   end
 end

@@ -46,12 +46,14 @@ class ScrapCbfRecord
           if ranking
             hash = normalize_before_update(hash, associations)
 
-            ranking.update(hash)
+            ranking.assign_attributes(hash)
           else
             hash = normalize_before_create(hash, associations)
 
-            @class_ranking.create(hash)
+            ranking = @class_ranking.new(hash)
           end
+
+          save_or_log_error(ranking)
         end
         true
       end

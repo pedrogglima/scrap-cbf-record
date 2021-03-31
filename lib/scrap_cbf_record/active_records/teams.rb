@@ -29,7 +29,9 @@ class ScrapCbfRecord
 
           hash = normalize_before_create(hash)
 
-          @class_team.create(hash)
+          team = @class_team.new(hash)
+
+          save_or_log_error(team)
         end
         true
       end

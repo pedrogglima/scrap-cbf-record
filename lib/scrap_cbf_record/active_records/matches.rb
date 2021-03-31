@@ -48,12 +48,14 @@ class ScrapCbfRecord
           if match
             hash = normalize_before_update(hash, associations)
 
-            match.update(hash)
+            match.assign_attributes(hash)
           else
             hash = normalize_before_create(hash, associations)
 
-            @class_match.create(hash)
+            match = @class_match.new(hash)
           end
+
+          save_or_log_error(match)
         end
         true
       end

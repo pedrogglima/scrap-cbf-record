@@ -33,7 +33,9 @@ class ScrapCbfRecord
 
           hash = normalize_before_create(hash, { championship: championship })
 
-          @class_round.create(hash)
+          round = @class_round.new(hash)
+
+          save_or_log_error(round)
         end
         true
       end

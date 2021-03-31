@@ -18,4 +18,13 @@ class ScrapCbfRecord
       super(message)
     end
   end
+
+  # Raise when a validation error is found
+  class ActiveRecordValidationError < BaseError
+    def initialize
+      message = 'An error raised while saving records.' \
+      ' Check the log for more details'
+      super(message)
+    end
+  end
 end

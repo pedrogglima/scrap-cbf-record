@@ -90,6 +90,21 @@ class ScrapCbfRecord
         hash
       end
 
+      # Save record instance or log the errors found
+      #
+      # @raise [ActiveRecordError]
+      # @param record [ActiveRecord] instance to be saved
+      # @return [ActiveRecord] the instance saved
+      def save_or_log_error(record)
+        if record.valid?
+          record.save
+        else
+          log_record_errors(record)
+          raise ActiveRecordValidationError
+        end
+        record
+      end
+
       protected
 
       def find_championship(year)
@@ -220,6 +235,13 @@ class ScrapCbfRecord
         return if records.respond_to?(:each)
 
         raise ::ArgumentError, "#{records_type} must respond to method :each"
+      end
+
+      def log_record_errors(record)
+        TagLogger.with_context(record.class, 'Errors found while saving')
+        record.errors.each do |attribute, message|
+          TagLogger.with_context('error', "#{attribute}: #{message}")
+        end
       end
     end
   end

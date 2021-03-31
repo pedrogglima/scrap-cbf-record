@@ -226,6 +226,29 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
         end
       end
     end
+
+    # Raised when ActiveRecord method valid? is false before saving
+    context 'when record is invalid' do
+      let(:invalid_hash) { attributes_for(:invalid_ranking_hash) }
+
+      subject { ScrapCbfRecord::ActiveRecord::Rankings.new([invalid_hash]) }
+
+      before do
+        ScrapCbfRecord.settings do |config|
+          config.ranking.config = {
+            class_name: 'RankingWithValidation'
+          }
+        end
+
+        Ranking.destroy_all
+      end
+
+      it do
+        expect do
+          subject.create_or_update(championship_hash)
+        end.to(raise_error ScrapCbfRecord::ActiveRecordValidationError)
+      end
+    end
   end
 
   describe 'normalize_before_' do

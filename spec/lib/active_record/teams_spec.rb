@@ -74,6 +74,29 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Teams do
         end
       end
     end
+
+    # Raised when ActiveRecord method valid? is false before saving
+    context 'when record is invalid' do
+      let(:invalid_hash) { attributes_for(:invalid_team_hash) }
+
+      subject { ScrapCbfRecord::ActiveRecord::Teams.new([invalid_hash]) }
+
+      before do
+        ScrapCbfRecord.settings do |config|
+          config.team.config = {
+            class_name: 'TeamWithValidation'
+          }
+        end
+
+        Team.destroy_all
+      end
+
+      it do
+        expect do
+          subject.create_unless_found
+        end.to(raise_error ScrapCbfRecord::ActiveRecordValidationError)
+      end
+    end
   end
 
   describe 'normalize_before_create' do
