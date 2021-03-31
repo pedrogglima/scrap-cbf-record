@@ -92,7 +92,7 @@ class ScrapCbfRecord
 
       # Save record instance or log the errors found
       #
-      # @raise [ActiveRecordError]
+      # @raise [ActiveRecordValidationError]
       # @param record [ActiveRecord] instance to be saved
       # @return [ActiveRecord] the instance saved
       def save_or_log_error(record)
