@@ -27,4 +27,15 @@ class ScrapCbfRecord
       super(message)
     end
   end
+
+  # Raise when the championship instance is not found on database
+  class ChampionshipInstanceNotFoundError < BaseError
+    def initialize(year)
+      message = "The Championship instance for year #{year}" \
+      ' was not found on database. Check if the values are right' \
+      ' or the instance exist on database, before saving records'
+
+      super(message)
+    end
+  end
 end

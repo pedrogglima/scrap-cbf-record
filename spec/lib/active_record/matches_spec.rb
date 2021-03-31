@@ -15,6 +15,22 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Matches do
 
   describe 'create_or_update' do
     describe 'create_or_update' do
+      context 'when championship is not found on db' do
+        before do
+          Match.destroy_all
+        end
+
+        let(:championship_hash) do
+          attributes_for(:championship_hash, year: 2050)
+        end
+
+        it do
+          expect do
+            subject.create_or_update(championship_hash)
+          end.to(raise_error ScrapCbfRecord::ChampionshipInstanceNotFoundError)
+        end
+      end
+
       context 'using default settings' do
         context 'when there aren\'t matches' do
           before do

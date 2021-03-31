@@ -13,6 +13,22 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rankings do
   subject { ScrapCbfRecord::ActiveRecord::Rankings.new(array_rankings) }
 
   describe 'create_or_update' do
+    context 'when championship is not found on db' do
+      before do
+        Ranking.destroy_all
+      end
+
+      let(:championship_hash) do
+        attributes_for(:championship_hash, year: 2050)
+      end
+
+      it do
+        expect do
+          subject.create_or_update(championship_hash)
+        end.to(raise_error ScrapCbfRecord::ChampionshipInstanceNotFoundError)
+      end
+    end
+
     context 'using default settings' do
       context 'when there aren\'t rankings' do
         before do

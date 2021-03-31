@@ -107,12 +107,18 @@ class ScrapCbfRecord
 
       protected
 
-      def find_championship(year)
-        if @current_config.championship_assoc?
-          @class_championship.find_by(year: year)
-        else
-          year
-        end
+      def find_championship!(year)
+        instance = if @current_config.championship_assoc? ||
+                      @current_config.record_is_a?(:championship)
+
+                     @class_championship.find_by(year: year)
+                   else
+                     year
+                   end
+
+        raise ChampionshipInstanceNotFoundError, year unless instance
+
+        instance
       end
 
       def find_match(id_match, championship, serie)

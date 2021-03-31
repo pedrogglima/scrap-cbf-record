@@ -11,6 +11,22 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
   subject { ScrapCbfRecord::ActiveRecord::Rounds.new(array_rounds) }
 
   describe 'create_unless_found' do
+    context 'when championship is not found on db' do
+      before do
+        Round.destroy_all
+      end
+
+      let(:championship_hash) do
+        attributes_for(:championship_hash, year: 2050)
+      end
+
+      it do
+        expect do
+          subject.create_unless_found(championship_hash)
+        end.to(raise_error ScrapCbfRecord::ChampionshipInstanceNotFoundError)
+      end
+    end
+
     context 'using default settings' do
       let(:round) { create(:round, championship_id: championship.id) }
 
