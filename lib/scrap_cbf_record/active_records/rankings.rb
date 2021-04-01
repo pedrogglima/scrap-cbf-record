@@ -14,6 +14,7 @@ class ScrapCbfRecord
 
         super(configurations.ranking, configurations)
 
+        @query = QueryRecord.new(configurations.ranking)
         @rankings = rankings
       end
 
@@ -24,14 +25,14 @@ class ScrapCbfRecord
       # @raise [ActiveRecordError] if fail on saving
       # @return [Boolean] true if not exception is raise
       def create_or_update(championship_hash)
-        championship = find_championship!(championship_hash[:year])
+        championship = @query.find_championship!(championship_hash[:year])
         serie = championship_hash[:serie]
 
         ::ActiveRecord::Base.transaction do
           @rankings.each do |hash|
-            ranking = find_ranking(hash[:position], championship, serie)
-            team = find_team(hash[:team])
-            next_opponent = find_team(hash[:next_opponent])
+            ranking = @query.find_ranking(hash[:position], championship, serie)
+            team = @query.find_team(hash[:team])
+            next_opponent = @query.find_team(hash[:next_opponent])
 
             # these are the associations found
             # they may be <record> class or a string/integer

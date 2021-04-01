@@ -14,6 +14,7 @@ class ScrapCbfRecord
 
         super(configurations.team, configurations)
 
+        @query = QueryRecord.new(configurations.team)
         @teams = teams
       end
 
@@ -25,7 +26,7 @@ class ScrapCbfRecord
       def create_unless_found
         ::ActiveRecord::Base.transaction do
           @teams.each do |hash|
-            team = find_team(hash[:name])
+            team = @query.find_team(hash[:name])
             next if team
 
             hash = normalize_before_create(hash)

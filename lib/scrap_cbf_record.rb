@@ -4,6 +4,7 @@ require_relative 'scrap_cbf_record/version'
 require_relative 'scrap_cbf_record/logger'
 require_relative 'scrap_cbf_record/errors'
 require_relative 'scrap_cbf_record/config'
+require_relative 'scrap_cbf_record/query_record'
 require_relative 'scrap_cbf_record/active_record'
 
 # This module saves on database the output from the gem ScrapCbf
