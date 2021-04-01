@@ -27,35 +27,37 @@ class ScrapCbfRecord
         championship = find_championship!(championship_hash[:year])
         serie = championship_hash[:serie]
 
-        @matches.each do |hash|
-          match = find_match(hash[:id_match], championship, serie)
-          round = find_round(hash[:round], championship, serie)
-          team = find_team(hash[:team])
-          opponent = find_team(hash[:opponent])
+        ::ActiveRecord::Base.transaction do
+          @matches.each do |hash|
+            match = find_match(hash[:id_match], championship, serie)
+            round = find_round(hash[:round], championship, serie)
+            team = find_team(hash[:team])
+            opponent = find_team(hash[:opponent])
 
-          # these are the associations found
-          # they may be <record> class or a string/integer
-          # For string/integer cases, it happens when there aren't association:
-          # the config for the record hasn't the specific association,
-          # so it returns whatever is in the hash
-          associations = {
-            championship: championship,
-            round: round,
-            team: team,
-            opponent: opponent
-          }
+            # these are the associations found
+            # they may be <record> class or a string/integer
+            # For string/integer cases, it happens when there aren't association:
+            # the config for the record hasn't the specific association,
+            # so it returns whatever is in the hash
+            associations = {
+              championship: championship,
+              round: round,
+              team: team,
+              opponent: opponent
+            }
 
-          if match
-            hash = normalize_before_update(hash, associations)
+            if match
+              hash = normalize_before_update(hash, associations)
 
-            match.assign_attributes(hash)
-          else
-            hash = normalize_before_create(hash, associations)
+              match.assign_attributes(hash)
+            else
+              hash = normalize_before_create(hash, associations)
 
-            match = @class_match.new(hash)
+              match = @class_match.new(hash)
+            end
+
+            save_or_log_error(match)
           end
-
-          save_or_log_error(match)
         end
         true
       end

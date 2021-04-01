@@ -27,33 +27,35 @@ class ScrapCbfRecord
         championship = find_championship!(championship_hash[:year])
         serie = championship_hash[:serie]
 
-        @rankings.each do |hash|
-          ranking = find_ranking(hash[:position], championship, serie)
-          team = find_team(hash[:team])
-          next_opponent = find_team(hash[:next_opponent])
+        ::ActiveRecord::Base.transaction do
+          @rankings.each do |hash|
+            ranking = find_ranking(hash[:position], championship, serie)
+            team = find_team(hash[:team])
+            next_opponent = find_team(hash[:next_opponent])
 
-          # these are the associations found
-          # they may be <record> class or a string/integer
-          # For string/integer cases, it happens when there aren't association:
-          # the config for the record hasn't the specific association,
-          # so it returns whatever is in the hash
-          associations = {
-            championship: championship,
-            team: team,
-            next_opponent: next_opponent
-          }
+            # these are the associations found
+            # they may be <record> class or a string/integer
+            # For string/integer cases, it happens when there aren't association:
+            # the config for the record hasn't the specific association,
+            # so it returns whatever is in the hash
+            associations = {
+              championship: championship,
+              team: team,
+              next_opponent: next_opponent
+            }
 
-          if ranking
-            hash = normalize_before_update(hash, associations)
+            if ranking
+              hash = normalize_before_update(hash, associations)
 
-            ranking.assign_attributes(hash)
-          else
-            hash = normalize_before_create(hash, associations)
+              ranking.assign_attributes(hash)
+            else
+              hash = normalize_before_create(hash, associations)
 
-            ranking = @class_ranking.new(hash)
+              ranking = @class_ranking.new(hash)
+            end
+
+            save_or_log_error(ranking)
           end
-
-          save_or_log_error(ranking)
         end
         true
       end

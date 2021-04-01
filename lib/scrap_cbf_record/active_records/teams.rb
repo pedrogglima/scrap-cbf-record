@@ -23,15 +23,17 @@ class ScrapCbfRecord
       # @raise [ActiveRecordError] if fail on saving
       # @return [Boolean] true if not exception is raise
       def create_unless_found
-        @teams.each do |hash|
-          team = find_team(hash[:name])
-          next if team
+        ::ActiveRecord::Base.transaction do
+          @teams.each do |hash|
+            team = find_team(hash[:name])
+            next if team
 
-          hash = normalize_before_create(hash)
+            hash = normalize_before_create(hash)
 
-          team = @class_team.new(hash)
+            team = @class_team.new(hash)
 
-          save_or_log_error(team)
+            save_or_log_error(team)
+          end
         end
         true
       end

@@ -27,15 +27,17 @@ class ScrapCbfRecord
         championship = find_championship!(championship_hash[:year])
         serie = championship_hash[:serie]
 
-        @rounds.each do |hash|
-          round = find_round(hash[:number], championship, serie)
-          next if round
+        ::ActiveRecord::Base.transaction do
+          @rounds.each do |hash|
+            round = find_round(hash[:number], championship, serie)
+            next if round
 
-          hash = normalize_before_create(hash, { championship: championship })
+            hash = normalize_before_create(hash, { championship: championship })
 
-          round = @class_round.new(hash)
+            round = @class_round.new(hash)
 
-          save_or_log_error(round)
+            save_or_log_error(round)
+          end
         end
         true
       end
