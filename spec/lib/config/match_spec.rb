@@ -175,4 +175,21 @@ RSpec.describe ScrapCbfRecord::Config::Match do
   describe 'record_attrs' do
     it { expect(subject.record_attrs).to(eq(record_attrs)) }
   end
+
+  describe 'exclude_attrs' do
+    let(:config) { default_config }
+
+    let(:exclude_attrs) do
+      (
+        config[:exclude_attrs_on_create] &
+        config[:exclude_attrs_on_update]
+      ) +
+        required[:must_exclude_attrs] +
+        config[:associations].keys
+    end
+
+    it do
+      expect(subject.exclude_attrs).to eq(exclude_attrs)
+    end
+  end
 end

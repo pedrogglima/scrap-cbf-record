@@ -188,11 +188,40 @@ class ScrapCbfRecord
         !@associations.empty?
       end
 
+      # Return the excludes attributes by user and lib.
+      # @note: non-exclude are the ones: not renamed, associated or excluded.
+      # @note: Lib excludes must_exclude_attrs
+      # @note: Lib excludes renamed attrs
+      # @note: Lib excludes associations simple form
+      #  e.g championship is simple form from championship_id
+      #
+      # @return [Array]
+      def exclude_attrs
+        # This handle especial case: round and team doesn't have update
+        user_exclusion = if record_is_a?(:round) || record_is_a?(:team)
+                           @exclude_attrs_on_create
+                         else
+                           (@exclude_attrs_on_create & @exclude_attrs_on_update)
+                         end
+
+        user_exclusion +
+          must_exclude_attrs +
+          @rename_attrs.keys +
+          @associations.keys
+      end
+
       # Returns required must_exclude_attrs
       #
       # @return [Array]
       def must_exclude_attrs
         self.class.must_exclude_attrs
+      end
+
+      # Returns record_attrs
+      #
+      # @return [Array]
+      def record_attrs
+        self.class.record_attrs
       end
 
       def class_name_validation(class_name)
