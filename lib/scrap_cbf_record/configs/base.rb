@@ -154,31 +154,31 @@ class ScrapCbfRecord
         attribute
       end
 
-      # Check if current config has specific setting association.
+      # Check if config has specific setting association.
       #
       # @return [Boolean]
-      def championship_assoc?
+      def championship_associate?
         return false unless @associations
 
-        @championship_assoc ||= @associations.key?(:championship)
+        @championship_associate ||= @associations.key?(:championship)
       end
 
       # Check if current config has specific setting association.
       #
       # @return [Boolean]
-      def round_assoc?
+      def round_associate?
         return false unless @associations
 
-        @round_assoc ||= @associations.key?(:round)
+        @round_associate ||= @associations.key?(:round)
       end
 
       # Check if current config has specific setting association.
       #
       # @return [Boolean]
-      def team_assoc?
+      def team_associate?
         return false unless @associations
 
-        @team_assoc ||= @associations.key?(:team)
+        @team_associate ||= @associations.key?(:team)
       end
 
       # Check if current config has any association.

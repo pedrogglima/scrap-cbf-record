@@ -72,16 +72,16 @@ RSpec.describe ScrapCbfRecord::Config::Team do
         it { expect(subject.record_is_a?(:another_class)).to be(false) }
       end
 
-      describe 'championship_assoc?' do
-        it { expect(subject.championship_assoc?).to be(false) }
+      describe 'championship_associate?' do
+        it { expect(subject.championship_associate?).to be(false) }
       end
 
-      describe 'round_assoc?' do
-        it { expect(subject.round_assoc?).to be(false) }
+      describe 'round_associate?' do
+        it { expect(subject.round_associate?).to be(false) }
       end
 
-      describe 'team_assoc?' do
-        it { expect(subject.team_assoc?).to be(false) }
+      describe 'team_associate?' do
+        it { expect(subject.team_associate?).to be(false) }
       end
 
       describe 'associations?' do

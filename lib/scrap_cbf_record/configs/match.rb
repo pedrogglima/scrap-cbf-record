@@ -117,6 +117,42 @@ class ScrapCbfRecord
           @associations
         ]
       end
+
+      # Check if config has specific association.
+      #
+      # @return [Boolean]
+      def championship_associate?
+        return false unless @associations
+
+        @championship_associate ||= @associations.key?(:championship)
+      end
+
+      # Check if config has specific association.
+      #
+      # @return [Boolean]
+      def round_associate?
+        return false unless @associations
+
+        @round_associate ||= @associations.key?(:round)
+      end
+
+      # Check if config has specific association.
+      #
+      # @return [Boolean]
+      def team_associate?
+        return false unless @associations
+
+        @team_associate ||= @associations.key?(:team)
+      end
+
+      # Check if config has specific association.
+      #
+      # @return [Boolean]
+      def opponent_associate?
+        return false unless @associations
+
+        @opponent_associate ||= @associations.key?(:opponent)
+      end
     end
   end
 end

@@ -85,16 +85,16 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
         it { expect(subject.record_is_a?(:another_class)).to be(false) }
       end
 
-      describe 'championship_assoc?' do
-        it { expect(subject.championship_assoc?).to be(true) }
+      describe 'championship_associate?' do
+        it { expect(subject.championship_associate?).to be(true) }
       end
 
-      describe 'round_assoc?' do
-        it { expect(subject.round_assoc?).to be(false) }
+      describe 'team_associate?' do
+        it { expect(subject.team_associate?).to be(true) }
       end
 
-      describe 'team_assoc?' do
-        it { expect(subject.team_assoc?).to be(true) }
+      describe 'next_opponent_associate?' do
+        it { expect(subject.team_associate?).to be(true) }
       end
 
       describe 'associations?' do
@@ -154,16 +154,16 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
         it { expect(subject.constant).to be(TableRow) }
       end
 
-      describe 'championship_assoc?' do
-        it { expect(subject.championship_assoc?).to be(true) }
+      describe 'championship_associate?' do
+        it { expect(subject.championship_associate?).to be(true) }
       end
 
-      describe 'round_assoc?' do
-        it { expect(subject.round_assoc?).to be(false) }
+      describe 'team_associate?' do
+        it { expect(subject.team_associate?).to be(true) }
       end
 
-      describe 'team_assoc?' do
-        it { expect(subject.team_assoc?).to be(true) }
+      describe 'next_opponent_associate?' do
+        it { expect(subject.team_associate?).to be(true) }
       end
     end
   end

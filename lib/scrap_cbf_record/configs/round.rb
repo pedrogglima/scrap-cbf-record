@@ -97,6 +97,15 @@ class ScrapCbfRecord
           @associations
         ]
       end
+
+      # Check if config has specific association.
+      #
+      # @return [Boolean]
+      def championship_associate?
+        return false unless @associations
+
+        @championship_associate ||= @associations.key?(:championship)
+      end
     end
   end
 end
