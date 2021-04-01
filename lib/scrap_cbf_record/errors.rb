@@ -38,4 +38,46 @@ class ScrapCbfRecord
       super(message)
     end
   end
+
+  class RecordClassNotDefinedError < BaseError
+    def initialize(record)
+      message = "The record class #{record.class_name}" \
+      ' was not defined. Check if the class exist or is being loaded'
+
+      super(message)
+    end
+  end
+
+  class RecordAssociationAttributeNotDefinedError < BaseError
+    def initialize(record, attribute)
+      message = "The record class #{record.class_name}" \
+      " has not defined the attribute #{attribute}." \
+      " If you don't want define this attribute," \
+      ' remove it from the config associations.'
+
+      super(message)
+    end
+  end
+
+  class RecordAttributeNotDefinedError < BaseError
+    def initialize(record, attribute)
+      message = "The record class #{record.class}" \
+      " has not defined the attribute #{attribute}." \
+      " If you don't want define this attribute," \
+      ' add it to the config lists of excludes on create and update.'
+
+      super(message)
+    end
+  end
+
+  class RecordRenameAttributeNotDefinedError < BaseError
+    def initialize(record, attribute)
+      message = "The record class #{record.class}" \
+      " has not defined the renamed attribute #{attribute}." \
+      ' Check if you write the attribute name correct, or' \
+      ' if you don\'t want rename, remove it from the config list rename attrs.'
+
+      super(message)
+    end
+  end
 end
