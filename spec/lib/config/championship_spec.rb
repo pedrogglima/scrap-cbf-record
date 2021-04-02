@@ -2,6 +2,7 @@
 
 RSpec.describe ScrapCbfRecord::Config::Championship do
   let(:klass) { ScrapCbfRecord::Config::Championship }
+  let(:model_class) {  ScrapCbfRecord::Championship }
   let(:default_config) do
     {
       class_name: 'Championship',
@@ -33,6 +34,10 @@ RSpec.describe ScrapCbfRecord::Config::Championship do
   end
 
   describe 'initialize' do
+    describe 'model' do
+      it { expect(subject.model).to be(model_class) }
+    end
+
     context 'when default <config_attrs>' do
       let(:config) { default_config }
 

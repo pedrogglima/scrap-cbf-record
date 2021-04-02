@@ -2,6 +2,7 @@
 
 RSpec.describe ScrapCbfRecord::Config::Match do
   let(:klass) { ScrapCbfRecord::Config::Match }
+  let(:model_class) {  ScrapCbfRecord::Match }
   let(:default_config) do
     {
       class_name: 'Match',
@@ -50,6 +51,10 @@ RSpec.describe ScrapCbfRecord::Config::Match do
   end
 
   describe 'initialize' do
+    describe 'model' do
+      it { expect(subject.model).to be(model_class) }
+    end
+
     context 'when default <config_attrs>' do
       let(:config) { default_config }
 

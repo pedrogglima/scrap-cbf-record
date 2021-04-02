@@ -66,7 +66,8 @@ class ScrapCbfRecord
         end
       end
 
-      attr_reader :class_name,
+      attr_reader :model,
+                  :class_name,
                   :rename_attrs,
                   :exclude_attrs_on_create,
                   :exclude_attrs_on_update,
@@ -76,13 +77,14 @@ class ScrapCbfRecord
       #
       # @return [nil]
       def initialize
+        @model = ScrapCbfRecord::Ranking
+        ScrapCbfRecord::Ranking.config = self
+
         @class_name = default_class_name
         @rename_attrs = default_rename_attrs
         @exclude_attrs_on_create = default_exclude_attrs_on_create
         @exclude_attrs_on_update = default_exclude_attrs_on_update
         @associations = default_associations
-
-        ScrapCbfRecord::Ranking.config = self
 
         super(*configs)
       end
