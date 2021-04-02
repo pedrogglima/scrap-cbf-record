@@ -33,7 +33,7 @@ class ScrapCbfRecord
         def record_attrs
           %i[
             year
-            division
+            serie
           ]
         end
       end
