@@ -24,10 +24,7 @@ class ScrapCbfRecord
       # @raise [ActiveRecordError] if fail on saving
       # @return [Boolean] true if not exception is raise
       def create_or_update(championship_hash)
-        championship =
-          Ranking.championship.find_by!(year: championship_hash[:year])
-
-        serie = championship_hash[:serie]
+        championship, serie = find_championship_by(championship_hash)
 
         ::ActiveRecord::Base.transaction do
           @rankings.each do |hash|
@@ -51,6 +48,15 @@ class ScrapCbfRecord
       end
 
       private
+
+      def find_championship_by(championship_hash)
+        championship =
+          Ranking.championship.find_by!(year: championship_hash[:year])
+
+        serie = championship_hash[:serie]
+
+        [championship, serie]
+      end
 
       def find_ranking_by(hash, championship, serie)
         Ranking.find_by(

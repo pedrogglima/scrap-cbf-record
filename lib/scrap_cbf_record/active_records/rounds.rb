@@ -24,10 +24,7 @@ class ScrapCbfRecord
       # @raise [ActiveRecordError] if fail on saving
       # @return [Boolean] true if not exception is raise
       def create_unless_found(championship_hash)
-        championship =
-          Round.championship.find_by!(year: championship_hash[:year])
-
-        serie = championship_hash[:serie]
+        championship, serie = find_championship_by(championship_hash)
 
         ::ActiveRecord::Base.transaction do
           @rounds.each do |hash|
@@ -46,6 +43,17 @@ class ScrapCbfRecord
           end
         end
         true
+      end
+
+      private
+
+      def find_championship_by(championship_hash)
+        championship =
+          Round.championship.find_by!(year: championship_hash[:year])
+
+        serie = championship_hash[:serie]
+
+        [championship, serie]
       end
     end
   end
