@@ -90,7 +90,7 @@ RSpec.describe ScrapCbfRecord::Config::Round do
       end
 
       describe 'associations?' do
-        it { expect(subject.association?).to be(true) }
+        it { expect(subject.associations?).to be(true) }
       end
 
       describe 'must_exclude_attrs' do

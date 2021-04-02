@@ -129,36 +129,46 @@ class ScrapCbfRecord
       end
 
       # Check if attribute was renamed.
-      # It will search on attrs and associations for the calling class
-      # If not found returns the attribute
+      # It will search on attrs and associations for the calling class.
+      # If not found returns the attribute.
       #
       # @param [attribute] the attribute to be searched on the calling class
       # @return [Symbol]
       def searchable_attr(attribute)
         attribute = attribute.to_sym
 
-        # associations are in the for of association-name_id
-        attr_name, attr_id = attribute.to_s.split('_')
+        foreign_key = fetch_association_foreign_key(attribute)
 
-        if attr_name && attr_id
-          associaion_name = attr_name.to_sym
-          if @associations.key?(associaion_name)
-            association = @associations[associaion_name]
-
-            return association[:foreign_key]
-          end
-        end
+        return foreign_key if foreign_key
 
         return @rename_attrs[attribute] if @rename_attrs.key?(attribute)
 
         attribute
       end
 
+      # Returns the foreign key for the given association name.
+      # @note the association must be passed in the form <association-name>_id
+      #  to distinguish from the record hash attrs using the association name
+      #
+      # @param association [String, Symbol] <association-name>_id
+      # @return [Symbol, nil] Symbol if exist
+      def fetch_association_foreign_key(association_fk)
+        # associations are in the for of association-name_id
+        attr_name, attr_id = association_fk.to_s.split('_')
+
+        return unless attr_name && attr_id
+
+        association_name = attr_name.to_sym
+        return unless @associations.key?(association_name)
+
+        @associations[association_name][:foreign_key]
+      end
+
       # Check if config has specific setting association.
       #
       # @return [Boolean]
       def championship_associate?
-        return false unless @associations
+        return false unless associations?
 
         @championship_associate ||= @associations.key?(:championship)
       end
@@ -167,7 +177,7 @@ class ScrapCbfRecord
       #
       # @return [Boolean]
       def round_associate?
-        return false unless @associations
+        return false unless associations?
 
         @round_associate ||= @associations.key?(:round)
       end
@@ -176,7 +186,7 @@ class ScrapCbfRecord
       #
       # @return [Boolean]
       def team_associate?
-        return false unless @associations
+        return false unless associations?
 
         @team_associate ||= @associations.key?(:team)
       end
@@ -184,8 +194,8 @@ class ScrapCbfRecord
       # Check if current config has any association.
       #
       # @return [Boolean]
-      def association?
-        !@associations.empty?
+      def associations?
+        @associations && !@associations.empty?
       end
 
       # Return the excludes attributes by user and lib.
@@ -197,7 +207,7 @@ class ScrapCbfRecord
       #
       # @return [Array]
       def exclude_attrs
-        # This handle especial case: round and team doesn't have update
+        # This handle especial case: round and team doesn't have update action
         user_exclusion = if record_is_a?(:round) || record_is_a?(:team)
                            @exclude_attrs_on_create
                          else

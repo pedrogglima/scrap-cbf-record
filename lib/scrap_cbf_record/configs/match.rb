@@ -128,7 +128,7 @@ class ScrapCbfRecord
       #
       # @return [Boolean]
       def championship_associate?
-        return false unless @associations
+        return false unless associations?
 
         @championship_associate ||= @associations.key?(:championship)
       end
@@ -137,7 +137,7 @@ class ScrapCbfRecord
       #
       # @return [Boolean]
       def round_associate?
-        return false unless @associations
+        return false unless associations?
 
         @round_associate ||= @associations.key?(:round)
       end
@@ -146,7 +146,7 @@ class ScrapCbfRecord
       #
       # @return [Boolean]
       def team_associate?
-        return false unless @associations
+        return false unless associations?
 
         @team_associate ||= @associations.key?(:team)
       end
@@ -155,7 +155,7 @@ class ScrapCbfRecord
       #
       # @return [Boolean]
       def opponent_associate?
-        return false unless @associations
+        return false unless associations?
 
         @opponent_associate ||= @associations.key?(:opponent)
       end

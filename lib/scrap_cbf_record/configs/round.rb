@@ -104,7 +104,7 @@ class ScrapCbfRecord
       #
       # @return [Boolean]
       def championship_associate?
-        return false unless @associations
+        return false unless associations?
 
         @championship_associate ||= @associations.key?(:championship)
       end

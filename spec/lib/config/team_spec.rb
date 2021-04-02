@@ -85,7 +85,7 @@ RSpec.describe ScrapCbfRecord::Config::Team do
       end
 
       describe 'associations?' do
-        it { expect(subject.association?).to be(false) }
+        it { expect(subject.associations?).to be(false) }
       end
 
       describe 'must_exclude_attrs' do
