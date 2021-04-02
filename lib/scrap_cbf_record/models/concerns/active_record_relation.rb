@@ -19,7 +19,7 @@ class ScrapCbfRecord
     # @return [Object] return the obj found on db or their identifier
     def find_by(attributes)
       attributes[:associate] = @associate
-      @association_class.find_by(attributes)
+      @association_class.send __method__, attributes
     end
 
     # Searchs on the association. Dependes on the associate value,
@@ -31,7 +31,7 @@ class ScrapCbfRecord
     # @return [Object] return the obj found on db or their identifier
     def find_by!(attributes)
       attributes[:associate] = @associate
-      @association_class.find_by!(attributes)
+      @association_class.send __method__, attributes
     end
   end
 end
