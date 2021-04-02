@@ -78,6 +78,16 @@ class ScrapCbfRecord
 
     private_class_method :new
 
+    # Validate users/default configuration
+    # - check if record classes were defined
+    # - check if attrs were defined on record classes
+    #
+    # @raise [RecordClassNotDefinedError] if record class is not defined
+    # @raise [RecordAssociationAttributeNotDefinedError]
+    #  if association undefined
+    # @raise [RecordRenameAttributeNotDefinedError] if renamed attr undefined
+    # @raise [RecordAttributeNotDefinedError] if attr is undefined
+    # @return [Boolean] true if pass
     def validate!
       config_classes.each do |config_record|
         validate_record_presence!(config_record)
