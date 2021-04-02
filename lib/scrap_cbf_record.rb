@@ -3,6 +3,7 @@
 require_relative 'scrap_cbf_record/version'
 require_relative 'scrap_cbf_record/logger'
 require_relative 'scrap_cbf_record/errors'
+require_relative 'scrap_cbf_record/models/base'
 require_relative 'scrap_cbf_record/models/championship'
 require_relative 'scrap_cbf_record/models/match'
 require_relative 'scrap_cbf_record/models/ranking'
