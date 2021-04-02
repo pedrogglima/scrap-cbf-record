@@ -28,7 +28,7 @@ class ScrapCbfRecord
       end
 
       def find_championship!(year)
-        instance = if @current_config.championship_assoc? ||
+        instance = if @current_config.championship_associate? ||
                       @current_config.record_is_a?(:championship)
 
                      @class_championship.find_by(year: year)
@@ -42,7 +42,7 @@ class ScrapCbfRecord
       end
 
       def find_match(id_match, championship, serie)
-        if @current_config.championship_assoc?
+        if @current_config.championship_associate?
           find_match_with_association_fk(id_match, championship)
         else
           find_match_without_association_fk(id_match, championship, serie)
@@ -65,7 +65,7 @@ class ScrapCbfRecord
       end
 
       def find_ranking(position, championship, serie)
-        if @current_config.championship_assoc?
+        if @current_config.championship_associate?
           find_ranking_with_association_fk(position, championship)
         else
           find_ranking_without_association_fk(position, championship, serie)
@@ -88,7 +88,7 @@ class ScrapCbfRecord
       end
 
       def find_round(number, championship, serie)
-        if @current_config.round_assoc? || @current_config.record_is_a?(:round)
+        if @current_config.round_associate? || @current_config.record_is_a?(:round)
           find_round_on_database(number, championship, serie)
         else
           number
@@ -96,7 +96,7 @@ class ScrapCbfRecord
       end
 
       def find_round_on_database(number, championship, serie)
-        if @current_config.championship_assoc?
+        if @current_config.championship_associate?
           find_round_with_association_fk(number, championship)
         else
           find_round_without_association_fk(number, championship, serie)
@@ -119,7 +119,7 @@ class ScrapCbfRecord
       end
 
       def find_team(name)
-        if @current_config.team_assoc? || @current_config.record_is_a?(:team)
+        if @current_config.team_associate? || @current_config.record_is_a?(:team)
           @class_team.find_by("#{@config_team.searchable_attr(:name)}": name)
         else
           name
