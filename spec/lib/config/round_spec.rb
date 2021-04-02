@@ -104,7 +104,7 @@ RSpec.describe ScrapCbfRecord::Config::Round do
   end
 
   describe 'config=' do
-    let(:config) { attributes_for(:round_config, class_name: 'Turn') }
+    let(:config) { attributes_for(:round_config, class_name: 'Serie') }
 
     it { expect { subject.config = config }.to_not raise_error }
 
@@ -141,9 +141,9 @@ RSpec.describe ScrapCbfRecord::Config::Round do
       end
 
       describe 'constant' do
-        let!(:custom_class_name) { class Turn; end }
+        let!(:custom_class_name) { class Serie; end }
 
-        it { expect(subject.constant).to be(Turn) }
+        it { expect(subject.constant).to be(Serie) }
       end
 
       describe 'championship_associate?' do
