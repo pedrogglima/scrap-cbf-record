@@ -9,6 +9,8 @@ class ScrapCbfRecord
         #
         @config = config
 
+        # This reference the user class used to save on database
+        #
         @model = config.klass
 
         # current configs set by users
@@ -110,6 +112,7 @@ class ScrapCbfRecord
           record.save
         else
           log_record_errors(record)
+          # It raises custom error to display message warning about the logs.
           raise ActiveRecordValidationError
         end
         record
@@ -117,6 +120,14 @@ class ScrapCbfRecord
 
       protected
 
+      # Includes associations <attribute_id> and its value to the record hash
+      #  only include if the associations was set by the user.
+      #
+      # @param hash [Hash] record hash to be modified
+      # @param associations [Hash] hash contaning associations details
+      # @param assocs [Hash] hash contaning the associations
+      #  values returned by find_by
+      # @return [Hash] record hash with associations included
       def include_associations(hash, associations, assocs)
         associations.each do |name, attrs|
           instance = assocs[name.to_sym]
@@ -134,11 +145,30 @@ class ScrapCbfRecord
         hash
       end
 
+      # Exclude some keys from the record hash
+      #
+      # @param hash [Hash] record hash to be modified
+      # @param attrs [Array] has the keys to be exclude.
+      #  These attrs are the union of exclude_attrs_on_create/update.
+      # @param must_exclude [Array] has the keys to be excluded.
+      #  The keys are set by the lib, and is used to remove unwanted attrs.
+      # @param associations [Array] has the names of the associations.
+      #  include_associations method does't remove the associations added.
+      #  e.g if championship association exist, then:
+      #   add championship_id to hash.
+      #   But, it doesn't remove the championship key from the hash.
+      #   It's remove here.
+      # @return [Hash] record hash modified
       def exclude_attrs(hash, attrs, must_exclude, associations)
         exclude = attrs + associations + must_exclude
         hash.except(*exclude)
       end
 
+      # Rename keys from the record hash
+      #
+      # @param hash [Hash] record hash to be modified
+      # @param renames [Hash] has the keys to be renamed by the key's value.
+      # @return [Hash] record hash modified
       def rename_attrs(hash, renames)
         # rename attrs
         renames.each do |key, val|
@@ -155,7 +185,10 @@ class ScrapCbfRecord
       end
 
       def log_record_errors(record)
-        TagLogger.with_context(record.class, 'Errors found while saving')
+        TagLogger.with_context(
+          [record.class, Time.current],
+          'Errors found while saving'
+        )
         record.errors.each do |attribute, message|
           TagLogger.with_context('error', "#{attribute}: #{message}")
         end
