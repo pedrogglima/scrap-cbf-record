@@ -34,6 +34,12 @@ class ScrapCbfRecord
         )
       end
 
+      # Find the current model on db. If current model is associate
+      #  to championship, the attribute serie is not need, as the
+      #  association can be used as a unique identifer for the model.
+      #
+      # @param attributes [Hash] the attrs used to find on db
+      # @return [Object, nil] returns Object if find, else nil
       def find_by(attributes)
         id_match     = attributes[:id_match]
         championship = attributes[:championship]
