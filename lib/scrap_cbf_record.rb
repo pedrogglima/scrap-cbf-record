@@ -10,7 +10,6 @@ require_relative 'scrap_cbf_record/models/round'
 require_relative 'scrap_cbf_record/models/team'
 require_relative 'scrap_cbf_record/models/concerns/active_record_relation'
 require_relative 'scrap_cbf_record/config'
-require_relative 'scrap_cbf_record/query_record'
 require_relative 'scrap_cbf_record/active_record'
 
 # This module saves on database the output from the gem ScrapCbf
