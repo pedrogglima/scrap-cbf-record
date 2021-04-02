@@ -12,7 +12,7 @@ class ScrapCbfRecord
 
         configurations = ScrapCbfRecord.config
 
-        super(configurations.team, configurations)
+        super(configurations.team)
 
         @teams = teams
       end
@@ -30,7 +30,7 @@ class ScrapCbfRecord
 
             hash = normalize_before_create(hash)
 
-            team = @class_team.new(hash)
+            team = Team.new(hash)
 
             save_or_log_error(team)
           end

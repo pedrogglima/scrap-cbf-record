@@ -12,7 +12,7 @@ class ScrapCbfRecord
 
         configurations = ScrapCbfRecord.config
 
-        super(configurations.ranking, configurations)
+        super(configurations.ranking)
 
         @rankings = rankings
       end
@@ -59,7 +59,7 @@ class ScrapCbfRecord
             else
               hash = normalize_before_create(hash, associations)
 
-              ranking = @class_ranking.new(hash)
+              ranking = Ranking.new(hash)
             end
 
             save_or_log_error(ranking)

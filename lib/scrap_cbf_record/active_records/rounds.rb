@@ -12,7 +12,7 @@ class ScrapCbfRecord
 
         configurations = ScrapCbfRecord.config
 
-        super(configurations.round, configurations)
+        super(configurations.round)
 
         @rounds = rounds
       end
@@ -40,7 +40,7 @@ class ScrapCbfRecord
 
             hash = normalize_before_create(hash, { championship: championship })
 
-            round = @class_round.new(hash)
+            round = Round.new(hash)
 
             save_or_log_error(round)
           end

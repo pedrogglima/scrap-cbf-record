@@ -12,7 +12,7 @@ class ScrapCbfRecord
 
         configurations = ScrapCbfRecord.config
 
-        super(configurations.match, configurations)
+        super(configurations.match)
 
         @matches = matches
       end
@@ -63,7 +63,7 @@ class ScrapCbfRecord
             else
               hash = normalize_before_create(hash, associations)
 
-              match = @class_match.new(hash)
+              match = Match.new(hash)
             end
 
             save_or_log_error(match)

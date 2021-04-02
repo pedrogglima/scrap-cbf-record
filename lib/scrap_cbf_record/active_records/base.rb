@@ -4,36 +4,21 @@ class ScrapCbfRecord
   class ActiveRecord
     # Superclass for the classes lib/active_records/<record>.rb
     class Base
-      def initialize(current_config, config)
-        # classes set by users
-        # e.g @class_championship => # may be Cup class
-        #
-        @class_championship = config.championship.klass
-        @class_match = config.match.klass
-        @class_ranking = config.ranking.klass
-        @class_round = config.round.klass
-        @class_team = config.team.klass
-
+      def initialize(config)
         # current config is associated with the current record class
         #
-        @current_config = current_config
-        # configs associated with the record classes
-        #
-        @config_match = config.match
-        @config_ranking = config.ranking
-        @config_round = config.round
-        @config_team = config.team
+        @config = config
 
         # current configs set by users
         #
-        @associations = @current_config.associations
-        @exclude_attrs_on_create = @current_config.exclude_attrs_on_create
-        @exclude_attrs_on_update = @current_config.exclude_attrs_on_update
-        @rename_attrs = @current_config.rename_attrs
+        @associations = @config.associations
+        @exclude_attrs_on_create = @config.exclude_attrs_on_create
+        @exclude_attrs_on_update = @config.exclude_attrs_on_update
+        @rename_attrs = @config.rename_attrs
 
         # current configs required by the system
         #
-        @must_exclude_attrs = @current_config.must_exclude_attrs
+        @must_exclude_attrs = @config.must_exclude_attrs
       end
 
       # Normalize, on create, the new record with:
