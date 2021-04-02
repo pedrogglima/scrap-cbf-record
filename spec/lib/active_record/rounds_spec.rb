@@ -178,7 +178,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
           config.round.config = {
             class_name: 'Serie',
             rename_attrs: { number: 'identifier' },
-            exclude_attrs_on_create: %i[],
+            exclude_attrs_on_create: %i[serie],
             exclude_attrs_on_update: %i[],
             associations: {
               championship: {
@@ -212,7 +212,7 @@ RSpec.describe ScrapCbfRecord::ActiveRecord::Rounds do
         ScrapCbfRecord.settings do |config|
           config.round.config = {
             class_name: 'RoundWithoutAssociation',
-            rename_attrs: { number: 'identifier' },
+            rename_attrs: { serie: 'division' },
             exclude_attrs_on_create: %i[],
             exclude_attrs_on_update: %i[],
             associations: {}
