@@ -5,9 +5,11 @@ class ScrapCbfRecord
     # Superclass for the classes lib/active_records/<record>.rb
     class Base
       def initialize(config)
-        # current config is associated with the current record class
+        # config is associated with the current record class
         #
         @config = config
+
+        @model = config.klass
 
         # current configs set by users
         #
@@ -19,6 +21,29 @@ class ScrapCbfRecord
         # current configs required by the system
         #
         @must_exclude_attrs = @config.must_exclude_attrs
+      end
+
+      # Normalize, for create and update, the new record with:
+      # Setting Associations
+      # Rename attributes
+      # Exclusion of attributes
+      #
+      # @param [Object] the record if exist
+      # @param [Hash] contaning the new record
+      # @param [Hash] contaning the existent record's associations
+      # @return [Object] normalized
+      def normalize_before_save(record, hash, associations = {})
+        if record
+          hash = normalize_before_update(hash, associations)
+
+          record.assign_attributes(hash)
+
+          record
+        else
+          hash = normalize_before_create(hash, associations)
+
+          @model.new(hash)
+        end
       end
 
       # Normalize, on create, the new record with:

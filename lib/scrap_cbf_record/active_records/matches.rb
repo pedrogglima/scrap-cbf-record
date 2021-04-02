@@ -31,24 +31,12 @@ class ScrapCbfRecord
 
         ::ActiveRecord::Base.transaction do
           @matches.each do |hash|
-            match = Match.find_by(
-              id_match: hash[:id_match],
-              championship: championship,
-              serie: serie
-            )
-            round = Match.round.find_by(
-              number: hash[:round],
-              championship: championship,
-              serie: serie
-            )
+            attrs = [hash, championship, serie]
+            match = find_match_by(*attrs)
+            round = find_round_by(*attrs)
             team = Match.team.find_by(name: hash[:team])
             opponent = Match.opponent.find_by(name: hash[:opponent])
 
-            # these are the associations found
-            # they may be <record> class or a string/integer
-            # For string/integer cases, it happens when there aren't association:
-            # the config for the record hasn't the specific association,
-            # so it returns whatever is in the hash
             associations = {
               championship: championship,
               round: round,
@@ -56,20 +44,30 @@ class ScrapCbfRecord
               opponent: opponent
             }
 
-            if match
-              hash = normalize_before_update(hash, associations)
-
-              match.assign_attributes(hash)
-            else
-              hash = normalize_before_create(hash, associations)
-
-              match = Match.new(hash)
-            end
+            match = normalize_before_save(match, hash, associations)
 
             save_or_log_error(match)
           end
         end
         true
+      end
+
+      private
+
+      def find_match_by(hash, championship, serie)
+        Match.find_by(
+          id_match: hash[:id_match],
+          championship: championship,
+          serie: serie
+        )
+      end
+
+      def find_round_by(hash, championship, serie)
+        Match.round.find_by(
+          number: hash[:round],
+          championship: championship,
+          serie: serie
+        )
       end
     end
   end

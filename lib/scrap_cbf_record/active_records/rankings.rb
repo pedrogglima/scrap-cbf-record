@@ -31,41 +31,33 @@ class ScrapCbfRecord
 
         ::ActiveRecord::Base.transaction do
           @rankings.each do |hash|
-            ranking = Ranking.find_by(
-              position: hash[:position],
-              championship: championship,
-              serie: serie
-            )
-
+            ranking = find_ranking_by(hash, championship, serie)
             team = Ranking.team.find_by(name: hash[:team])
             next_opponent =
               Ranking.next_opponent.find_by(name: hash[:next_opponent])
 
-            # these are the associations found
-            # they may be <record> class or a string/integer
-            # For string/integer cases, it happens when there aren't association:
-            # the config for the record hasn't the specific association,
-            # so it returns whatever is in the hash
             associations = {
               championship: championship,
               team: team,
               next_opponent: next_opponent
             }
 
-            if ranking
-              hash = normalize_before_update(hash, associations)
-
-              ranking.assign_attributes(hash)
-            else
-              hash = normalize_before_create(hash, associations)
-
-              ranking = Ranking.new(hash)
-            end
+            ranking = normalize_before_save(ranking, hash, associations)
 
             save_or_log_error(ranking)
           end
         end
         true
+      end
+
+      private
+
+      def find_ranking_by(hash, championship, serie)
+        Ranking.find_by(
+          position: hash[:position],
+          championship: championship,
+          serie: serie
+        )
       end
     end
   end
