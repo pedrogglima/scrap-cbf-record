@@ -54,6 +54,8 @@ class ScrapCbfRecord
         @exclude_attrs_on_update = default_exclude_attrs_on_update
         @associations = default_associations
 
+        ScrapCbfRecord::Championship.config = self
+
         super(*configs)
       end
 

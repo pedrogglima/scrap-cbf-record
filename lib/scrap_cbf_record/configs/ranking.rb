@@ -82,6 +82,8 @@ class ScrapCbfRecord
         @exclude_attrs_on_update = default_exclude_attrs_on_update
         @associations = default_associations
 
+        ScrapCbfRecord::Ranking.config = self
+
         super(*configs)
       end
 
