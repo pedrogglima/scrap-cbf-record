@@ -2,7 +2,7 @@
 
 class ScrapCbfRecord
   # Represents the class Ranking
-  class Ranking
+  class Ranking < Base
     class << self
       attr_accessor :config
 

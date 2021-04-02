@@ -2,7 +2,7 @@
 
 class ScrapCbfRecord
   # Represents the class Team
-  class Team
+  class Team < Base
     class << self
       attr_accessor :config
 

@@ -2,7 +2,7 @@
 
 class ScrapCbfRecord
   # Represents the class Match
-  class Match
+  class Match < Base
     class << self
       attr_accessor :config
 

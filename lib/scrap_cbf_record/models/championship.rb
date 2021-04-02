@@ -2,7 +2,7 @@
 
 class ScrapCbfRecord
   # Represents the class Championship
-  class Championship
+  class Championship < Base
     class << self
       attr_accessor :config
 
