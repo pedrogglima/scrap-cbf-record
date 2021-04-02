@@ -20,15 +20,5 @@ FactoryBot.define do
         }
       }
     end
-
-    initialize_with do
-      new({
-            class_name: class_name,
-            rename_attrs: rename_attrs,
-            exclude_attrs_on_create: exclude_attrs_on_create,
-            exclude_attrs_on_update: exclude_attrs_on_update,
-            associations: associations
-          })
-    end
   end
 end

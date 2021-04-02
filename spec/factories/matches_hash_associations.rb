@@ -6,15 +6,6 @@ FactoryBot.define do
     team { create(:team) }
     opponent { create(:team_opponent) }
     round { create(:round, championship_id: create(:championship).id) }
-
-    initialize_with do
-      new({
-            championship: championship,
-            team: team,
-            opponent: opponent,
-            round: round
-          })
-    end
   end
 
   factory :match_hash_without_associations, class: Hash do
@@ -22,14 +13,5 @@ FactoryBot.define do
     match_team
     match_opponent
     match_round
-
-    initialize_with do
-      new({
-            championship: championship_year,
-            team: match_team,
-            opponent: match_opponent,
-            round: match_round
-          })
-    end
   end
 end

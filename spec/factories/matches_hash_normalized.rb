@@ -14,21 +14,6 @@ FactoryBot.define do
     match_date
     match_start_at
     match_place
-
-    initialize_with do
-      new({
-            cup_id: cup_id,
-            match_team_id: match_team_id,
-            team_opponent_id: team_opponent_id,
-            match_round_id: match_round_id,
-            identifier: match_identifier,
-            team_score: match_team_score,
-            opponent_score: match_opponent_score,
-            date: match_date,
-            start_at: match_start_at,
-            place: match_place
-          })
-    end
   end
 
   factory :match_hash_normalized_without_association, class: Hash do
@@ -44,22 +29,5 @@ FactoryBot.define do
     match_date
     match_start_at
     match_place
-
-    initialize_with do
-      new({
-            championship: championship_year,
-            serie: championship_serie,
-            team: match_team,
-            opponent: match_opponent,
-            round: match_round,
-            id_match: match_id_match,
-            team_score: match_team_score,
-            opponent_score: match_opponent_score,
-            updates: match_updates,
-            date: match_date,
-            start_at: match_start_at,
-            place: match_place
-          })
-    end
   end
 end
