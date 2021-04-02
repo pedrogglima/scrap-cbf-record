@@ -66,6 +66,8 @@ class ScrapCbfRecord
 
       yield configuration if block_given?
 
+      configuration.validate!
+
       @config = configuration
     end
   end

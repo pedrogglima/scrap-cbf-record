@@ -23,24 +23,18 @@ class ScrapCbfRecord
   class Config
     include Singleton
 
-    def championship
-      @championship ||= Championship.new
-    end
+    attr_reader :championship,
+                :match,
+                :ranking,
+                :round,
+                :team
 
-    def match
-      @match ||= Match.new
-    end
-
-    def ranking
-      @ranking ||= Ranking.new
-    end
-
-    def round
-      @round ||= Round.new
-    end
-
-    def team
-      @team ||= Team.new
+    def initialize
+      @championship = Championship.new
+      @match = Match.new
+      @ranking = Ranking.new
+      @round = Round.new
+      @team = Team.new
     end
 
     # Return an array with all record classes
