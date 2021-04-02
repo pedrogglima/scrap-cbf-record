@@ -68,8 +68,8 @@ RSpec.describe ScrapCbfRecord::Config::Round do
         it { expect(subject.associations).to eq(config[:associations]) }
       end
 
-      describe 'constant' do
-        it { expect(subject.constant).to be(Round) }
+      describe 'klass' do
+        it { expect(subject.klass).to be(Round) }
       end
 
       describe 'record_is_a?' do
@@ -140,10 +140,10 @@ RSpec.describe ScrapCbfRecord::Config::Round do
         it { expect(subject.associations).to eq(config[:associations]) }
       end
 
-      describe 'constant' do
+      describe 'klass' do
         let!(:custom_class_name) { class Serie; end }
 
-        it { expect(subject.constant).to be(Serie) }
+        it { expect(subject.klass).to be(Serie) }
       end
 
       describe 'championship_associate?' do

@@ -48,11 +48,11 @@ class ScrapCbfRecord
     # @return [Array]
     def record_classes
       [
-        @championship.constant,
-        @match.constant,
-        @ranking.constant,
-        @round.constant,
-        @team.constant
+        @championship.klass,
+        @match.klass,
+        @ranking.klass,
+        @round.klass,
+        @team.klass
       ]
     end
 
@@ -101,7 +101,7 @@ class ScrapCbfRecord
     # @raise [RecordClassNotDefinedError] if record is not defined
     # @return [Objct] true if works
     def validate_record_presence!(config_record)
-      config_record.constant
+      config_record.klass
     rescue NameError
       raise RecordClassNotDefinedError, config_record
     end
@@ -111,7 +111,7 @@ class ScrapCbfRecord
     # @raise [RecordAssociationAttributeNotDefinedError] if not found
     # @return [Array] returns array of associations
     def validate_associations_presence!(config_record)
-      record_instance = config_record.constant.new
+      record_instance = config_record.klass.new
 
       # validte foreign key associations
       config_record.associations.each do |_key, assoc|
@@ -135,7 +135,7 @@ class ScrapCbfRecord
     # @raise [RecordAttributeNotDefinedError] if non-exclude not found
     # @return [Boolean] returns true if valid
     def validate_attrs_presence!(config_record)
-      record_instance = config_record.constant.new
+      record_instance = config_record.klass.new
       exclude_attrs = config_record.exclude_attrs
       rename_attrs = config_record.rename_attrs
 

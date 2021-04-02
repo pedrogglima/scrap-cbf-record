@@ -76,8 +76,8 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
         it { expect(subject.associations).to eq(config[:associations]) }
       end
 
-      describe 'constant' do
-        it { expect(subject.constant).to be(Ranking) }
+      describe 'klass' do
+        it { expect(subject.klass).to be(Ranking) }
       end
 
       describe 'record_is_a?' do
@@ -148,10 +148,10 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
         it { expect(subject.associations).to eq(config[:associations]) }
       end
 
-      describe 'constant' do
+      describe 'klass' do
         let!(:custom_class_name) { class TableRow; end }
 
-        it { expect(subject.constant).to be(TableRow) }
+        it { expect(subject.klass).to be(TableRow) }
       end
 
       describe 'championship_associate?' do

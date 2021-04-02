@@ -80,8 +80,8 @@ RSpec.describe ScrapCbfRecord::Config::Match do
         it { expect(subject.associations).to eq(config[:associations]) }
       end
 
-      describe 'constant' do
-        it { expect(subject.constant).to be(Match) }
+      describe 'klass' do
+        it { expect(subject.klass).to be(Match) }
       end
 
       describe 'record_is_a?' do
@@ -156,10 +156,10 @@ RSpec.describe ScrapCbfRecord::Config::Match do
         it { expect(subject.associations).to eq(config[:associations]) }
       end
 
-      describe 'constant' do
+      describe 'klass' do
         let!(:custom_class_name) { class Game; end }
 
-        it { expect(subject.constant).to be(Game) }
+        it { expect(subject.klass).to be(Game) }
       end
 
       describe 'championship_associate?' do

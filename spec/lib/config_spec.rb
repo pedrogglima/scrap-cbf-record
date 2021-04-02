@@ -238,7 +238,7 @@ RSpec.describe ScrapCbfRecord::Config do
 
     describe '_attr_presence_from_rename!' do
       let(:config_record) { subject.match }
-      let(:record_instance) { config_record.constant.new }
+      let(:record_instance) { config_record.klass.new }
       let(:attribute) { :id_match }
       let(:rename_attrs) do
         config_record.rename_attrs
@@ -299,7 +299,7 @@ RSpec.describe ScrapCbfRecord::Config do
 
     describe '_attr_presence_from_exclude!' do
       let(:config_record) { subject.match }
-      let(:record_instance) { config_record.constant.new }
+      let(:record_instance) { config_record.klass.new }
       let(:attribute) { :updates }
       let(:exclude_attrs) do
         config_record.exclude_attrs

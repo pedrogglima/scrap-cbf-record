@@ -113,7 +113,7 @@ class ScrapCbfRecord
       #
       # @raise [NameError] with class is not found
       # @return [Object] class set by user
-      def constant
+      def klass
         Object.const_get(@class_name)
       end
 

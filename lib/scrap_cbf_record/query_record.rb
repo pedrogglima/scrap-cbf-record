@@ -10,11 +10,11 @@ class ScrapCbfRecord
         # classes set by users
         # e.g @class_championship => # may be Cup class
         #
-        @class_championship = config.championship.constant
-        @class_match = config.match.constant
-        @class_ranking = config.ranking.constant
-        @class_round = config.round.constant
-        @class_team = config.team.constant
+        @class_championship = config.championship.klass
+        @class_match = config.match.klass
+        @class_ranking = config.ranking.klass
+        @class_round = config.round.klass
+        @class_team = config.team.klass
 
         # current config is associated with the current record class
         #

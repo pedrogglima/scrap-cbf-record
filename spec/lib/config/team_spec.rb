@@ -63,8 +63,8 @@ RSpec.describe ScrapCbfRecord::Config::Team do
         it { expect(subject.associations).to eq(config[:associations]) }
       end
 
-      describe 'constant' do
-        it { expect(subject.constant).to be(Team) }
+      describe 'klass' do
+        it { expect(subject.klass).to be(Team) }
       end
 
       describe 'record_is_a?' do
