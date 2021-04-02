@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :championships_attrs, class: Array do
     initialize_with do
-      %i[year division]
+      %i[year serie]
     end
   end
 end
