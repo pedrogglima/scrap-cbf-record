@@ -21,7 +21,7 @@ class ScrapCbfRecord
       # Create only if doesn't exist, otherwise do nothing
       #
       # @param [championship_hash] the championship associated with the rounds
-      # @raise [ActiveRecordError] if fail on saving
+      # @raise [ActiveRecordValidationError] if fail on saving
       # @return [Boolean] true if not exception is raise
       def create_unless_found(championship_hash)
         championship, serie = find_championship_by(championship_hash)

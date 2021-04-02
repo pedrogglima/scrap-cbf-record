@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  # This class helps with the communication between models associated
+  # This class helps with the communication between models association
   class ActiveRecordRelation
     # @param [association_class] the class associated that will be searched
     # @param [associate] boolean true if associate, false if it's not

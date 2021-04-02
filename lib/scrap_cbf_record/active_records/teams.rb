@@ -20,7 +20,7 @@ class ScrapCbfRecord
       # Creates the teams found on the instance variable teams
       # Create only if doesn't exist, otherwise do nothing
       #
-      # @raise [ActiveRecordError] if fail on saving
+      # @raise [ActiveRecordValidationError] if fail on saving
       # @return [Boolean] true if not exception is raise
       def create_unless_found
         ::ActiveRecord::Base.transaction do

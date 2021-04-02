@@ -52,7 +52,7 @@ class ScrapCbfRecord
     # - Teams must be save before Rankings and Match.
     # - Rounds must be save before Matches
     #
-    # @raise [ActiveRecordError] errors in case of failing while saving
+    # @raise [ActiveRecordValidationError] in case of failing while saving
     #
     # @return [Boolean] true in case of success
     def save

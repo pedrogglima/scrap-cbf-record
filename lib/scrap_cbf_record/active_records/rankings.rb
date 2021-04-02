@@ -21,7 +21,7 @@ class ScrapCbfRecord
       # Update if ranking already exist, otherwise create it.
       #
       # @param [championship_hash] the championship associated with the rankings
-      # @raise [ActiveRecordError] if fail on saving
+      # @raise [ActiveRecordValidationError] if fail on saving
       # @return [Boolean] true if not exception is raise
       def create_or_update(championship_hash)
         championship, serie = find_championship_by(championship_hash)
