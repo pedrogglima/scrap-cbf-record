@@ -234,19 +234,6 @@ class ScrapCbfRecord
         self.class.record_attrs
       end
 
-      def class_name_validation(class_name)
-        unless string?(class_name)
-          raise ::ArgumentError,
-                'Invalid type: class name must be a string or a symbol'
-        end
-
-        begin
-          Object.const_get(class_name)
-        rescue ::NameError
-          raise_custom_name_error(class_name)
-        end
-      end
-
       def default_class_name
         self.class.default_class_name
       end
@@ -265,17 +252,6 @@ class ScrapCbfRecord
 
       def default_associations
         self.class.default_associations
-      end
-
-      private
-
-      def raise_custom_name_error(class_name)
-        raise ::NameError, "uninitialized constant #{class_name}. " \
-          'the classes needed by this gem need to be declared (see doc).'
-      end
-
-      def string?(var)
-        !var.nil? && (var.is_a?(String) || var.is_a?(Symbol))
       end
     end
   end
