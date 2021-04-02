@@ -8,22 +8,22 @@ class ScrapCbfRecord
 
       def championship
         ActiveRecordRelation.new(
-          relation_class: Championship,
-          associate: @config.championship_associate?
+          Championship,
+          @config.championship_associate?
         )
       end
 
       def team
         ActiveRecordRelation.new(
-          relation_class: Team,
-          associate: @config.team_associate?
+          Team,
+          @config.team_associate?
         )
       end
 
       def next_opponent
         ActiveRecordRelation.new(
-          relation_class: Team,
-          associate: @config.next_opponent_associate?
+          Team,
+          @config.next_opponent_associate?
         )
       end
 
