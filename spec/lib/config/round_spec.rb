@@ -2,7 +2,6 @@
 
 RSpec.describe ScrapCbfRecord::Config::Round do
   let(:klass) { ScrapCbfRecord::Config::Round }
-  let(:model_class) {  ScrapCbfRecord::Round }
   let(:default_config) do
     {
       class_name: 'Round',
@@ -39,10 +38,6 @@ RSpec.describe ScrapCbfRecord::Config::Round do
   end
 
   describe 'initialize' do
-    describe 'model' do
-      it { expect(subject.model).to be(model_class) }
-    end
-
     context 'when default <config_attrs>' do
       let(:config) { default_config }
 

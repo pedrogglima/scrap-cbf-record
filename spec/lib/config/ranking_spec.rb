@@ -2,7 +2,6 @@
 
 RSpec.describe ScrapCbfRecord::Config::Ranking do
   let(:klass) { ScrapCbfRecord::Config::Ranking }
-  let(:model_class) {  ScrapCbfRecord::Ranking }
   let(:default_config) do
     {
       class_name: 'Ranking',
@@ -47,10 +46,6 @@ RSpec.describe ScrapCbfRecord::Config::Ranking do
   end
 
   describe 'initialize' do
-    describe 'model' do
-      it { expect(subject.model).to be(model_class) }
-    end
-
     context 'when default <config_attrs>' do
       let(:config) { default_config }
 
