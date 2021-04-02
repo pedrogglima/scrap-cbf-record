@@ -28,7 +28,7 @@ class ScrapCbfRecord
       # Rename attributes
       # Exclusion of attributes
       #
-      # @param [Object] the record if exist
+      # @param [Object, Nil] the record if exist
       # @param [Hash] contaning the new record
       # @param [Hash] contaning the existent record's associations
       # @return [Object] normalized
