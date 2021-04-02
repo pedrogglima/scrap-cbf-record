@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  # Represents the class Ranking
+  # Abstraction for the class Ranking
   class Ranking < Base
     class << self
       attr_accessor :config

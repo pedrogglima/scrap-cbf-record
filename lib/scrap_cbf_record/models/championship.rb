@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  # Represents the class Championship
+  # Abstraction for the class Championship
   class Championship < Base
     class << self
       attr_accessor :config

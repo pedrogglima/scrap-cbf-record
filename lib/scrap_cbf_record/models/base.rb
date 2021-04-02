@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  # Represents the class Championship
+  # Base class for the models abstractions
   class Base
     class << self
       # Create a instance for the real model, the one used by the user

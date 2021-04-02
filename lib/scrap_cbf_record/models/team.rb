@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  # Represents the class Team
+  # Abstraction for the class Team
   class Team < Base
     class << self
       attr_accessor :config

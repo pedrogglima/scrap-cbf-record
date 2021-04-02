@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ScrapCbfRecord
-  # Represents the class Round
+  # Abstraction for the class Round
   class Round < Base
     class << self
       attr_accessor :config
