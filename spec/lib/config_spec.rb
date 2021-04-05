@@ -38,8 +38,6 @@ RSpec.describe ScrapCbfRecord::Config do
   end
 
   describe 'record_classes' do
-    subject { klass.instance }
-
     it { expect(subject.record_classes).to be_a(Array) }
     it { expect(subject.record_classes).to include(championship_class) }
     it { expect(subject.record_classes).to include(match_class) }
@@ -50,8 +48,6 @@ RSpec.describe ScrapCbfRecord::Config do
   end
 
   describe 'config_classes' do
-    subject { klass.instance }
-
     it { expect(subject.config_classes).to be_a(Array) }
     it { expect(subject.config_classes).to include(championship_config) }
     it { expect(subject.config_classes).to include(match_config) }
@@ -59,6 +55,10 @@ RSpec.describe ScrapCbfRecord::Config do
     it { expect(subject.config_classes).to include(round_config) }
     it { expect(subject.config_classes).to include(team_config) }
     it { expect(subject.config_classes.length).to eq(5) }
+  end
+
+  describe 'logger=' do
+    it { expect(subject.logger = Logger.new(STDOUT)).to(be_a(::Logger)) }
   end
 
   # @note These specs take in account the records and the schema file initialize

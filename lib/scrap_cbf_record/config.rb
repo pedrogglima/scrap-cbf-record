@@ -15,6 +15,7 @@ class ScrapCbfRecord
   # - which class to use to save the records
   # - which record attributes to exclude on create and update
   # - which record attributes to rename
+  # - which db associations the record has.
   # Each of the configs are set for each record:
   # - match record
   # - ranking record
@@ -35,6 +36,14 @@ class ScrapCbfRecord
       @ranking = Ranking.new
       @round = Round.new
       @team = Team.new
+    end
+
+    # Define the logger to be use by ActiveSupport::TaggedLogging
+    #
+    # @param [Logger] active support logger with params
+    # @return [::Logger]
+    def logger=(logger)
+      TagLogger.logger = ActiveSupport::TaggedLogging.new(logger)
     end
 
     # Return an array with all record classes
