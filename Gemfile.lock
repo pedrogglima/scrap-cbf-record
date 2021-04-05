@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     scrap_cbf_record (0.1.0)
-      activesupport (~> 5.2.3)
-      json (~> 2.5)
+      activesupport (>= 5.0.0, <= 6.1.0)
+      json (~> 2.2, >= 2.2.0)
       yaml (~> 0.1.1)
 
 GEM
@@ -46,7 +46,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rubocop (~> 0.81.0)
+  rubocop (~> 0.81, >= 0.81.0)
   scrap_cbf_record!
   yard (~> 0.9)
 

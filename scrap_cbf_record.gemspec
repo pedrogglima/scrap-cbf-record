@@ -21,8 +21,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_dependency 'activesupport', '~> 6.1.0'
-  gem.add_dependency 'json', '~> 2.1.0'
+  gem.add_dependency 'activesupport', '>= 5.0.0', '<= 6.1.0'
+  gem.add_dependency 'json', '~> 2.2', '>= 2.2.0'
   gem.add_dependency 'yaml', '~> 0.1.1'
 
   # gem.add_development_dependencies load on spec/setup/Gemfile
@@ -30,6 +30,6 @@ Gem::Specification.new do |gem|
   #  must be added on spec/setup/Gemfile.
   # Note: gems on spec/setup/Gemfile are installed through Dockerfile cmd.
   # Note: gems added here must be installed locally through cmd bundle install
-  gem.add_development_dependency 'rubocop', '~> 0.81.0'
+  gem.add_development_dependency 'rubocop', '~> 0.81', '>= 0.81.0'
   gem.add_development_dependency 'yard', '~> 0.9'
 end
