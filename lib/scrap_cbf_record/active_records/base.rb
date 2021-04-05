@@ -185,12 +185,10 @@ class ScrapCbfRecord
       end
 
       def log_record_errors(record)
-        TagLogger.with_context(
-          [record.class, Time.current],
-          'Errors found while saving'
-        )
+        TagLogger.with_context([Time.current], 'Errors found while saving')
         record.errors.each do |attribute, message|
-          TagLogger.with_context('error', "#{attribute}: #{message}")
+          TagLogger.with_context(:info, record.inspect.to_s)
+          TagLogger.with_context(:error, "#{attribute}: #{message}")
         end
       end
     end
