@@ -30,6 +30,7 @@ Gem::Specification.new do |gem|
   #  must be added on spec/setup/Gemfile.
   # Note: gems on spec/setup/Gemfile are installed through Dockerfile cmd.
   # Note: gems added here must be installed locally through cmd bundle install
+  gem.add_development_dependency 'rspec', '~> 3.0'
   gem.add_development_dependency 'rubocop', '~> 0.81', '>= 0.81.0'
   gem.add_development_dependency 'yard', '~> 0.9'
 end
