@@ -50,7 +50,7 @@ class ScrapCbfRecord
     #       rename_attrs: {},
     #       exclude_attrs_on_create: %i[],
     #       exclude_attrs_on_update: %i[],
-    #       associations: %i[]
+    #       associations: {}
     #     }
     #
     #     config.match = { ... }
