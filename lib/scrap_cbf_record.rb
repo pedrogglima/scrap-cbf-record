@@ -15,9 +15,10 @@ require_relative 'scrap_cbf_record/active_record'
 
 # This module saves on database the output from the gem ScrapCbf
 #
-# It has two modules to accomplish that:
+# It has three modules to accomplish that:
 # - configs: holds the settings for how to save the data
 # - records: responsible for saving the data on database.
+# - models: abstraction classes for the real record classes created by the user.
 #
 # There configs are:
 # - championship
